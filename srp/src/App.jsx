@@ -1,19 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Login from "../src/componentes/login";
-import Cadastro from "../src/componentes/cadastro";
-import AuthForm from "../src/componentes/AuthForm";
+// src/App.jsx
+import React, { useState } from 'react';
+import Login from '../src/componentes/Login';
+import Cadastro from '../src/componentes/Cadastro';
+import './App.css';
+import '../src/styles/AuthForm.css'; 
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
 
   return (
-    <>
-      <AuthForm />
-    </>
-  )
-}
+    <div className="auth-container">
+      {isLogin ? (
+        <Login onToggle={toggleForm} />
+      ) : (
+        <Cadastro onToggle={toggleForm} />
+      )}
+    </div>
+  );
+};
 
-export default App
+export default App;
