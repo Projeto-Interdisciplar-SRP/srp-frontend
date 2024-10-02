@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     min-height: 50dvh;
-    width: 200%;
     overflow-y: hidden;
   }
   
@@ -14,7 +13,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: rgba(118, 144, 241, 1) 0.5px solid;
     width: 400px;
-    position: absolute;
+    position: relative;
   }
   
   .form-container h2 {

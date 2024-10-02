@@ -1,22 +1,30 @@
 // src/components/Login.jsx
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import api from '../serve/api';
+import '../styles/Auth.css';
 
-const Login = ({ onToggle }) => {
+const Login = ({ onToggle, onLoginSuccess }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  const onLogin = (data) => {
+  const onLogin = async (data) => {
     const { email, senha } = data;
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-    const user = users.find(user => user.email === email && user.senha === senha);
-
-    if (user) {
-      alert(`Bem-vindo, ${user.nome}!`);
+    try {
+      const response = await api.post('/auth/login', { email, senha });
+      const token = response.data.token;
+      // Armazenar o token no Local Storage ou em outro local seguro
+      localStorage.setItem('token', token);
+      alert('Login bem-sucedido!');
       reset();
-      // Aqui você pode redirecionar o usuário ou armazenar o estado de autenticação
-    } else {
-      alert('Email ou senha inválidos.');
+      if (onLoginSuccess) {
+        onLoginSuccess(); // Função para redirecionar ou atualizar o estado
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        alert(error.response.data);
+      } else {
+        alert('Erro ao fazer login.');
+      }
     }
   };
 

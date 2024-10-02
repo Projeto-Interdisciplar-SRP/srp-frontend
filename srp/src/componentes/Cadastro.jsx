@@ -1,27 +1,37 @@
 // src/components/Cadastro.jsx
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import '../styles/AuthForm.css';
+import api from '../serve/api';
+import '../styles/Auth.css';
 
 const Cadastro = ({ onToggle }) => {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const [cepError, setCepError] = useState('');
   const [isLoadingCep, setIsLoadingCep] = useState(false);
 
-  const onRegister = (data) => {
-    const { nome, email, senha, cep, rua, bairro, cidade } = data;
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-    const userExists = users.some(user => user.email === email);
-
-    if (userExists) {
-      alert('Usuário já cadastrado com este email.');
-    } else {
-      users.push({ nome, email, senha, cep, rua, bairro, cidade });
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Cadastro realizado com sucesso! Você pode fazer login agora.');
+  const onRegister = async (data) => {
+    const { nome, email, senha, cpf, rg, cep, rua, bairro, cidade } = data;
+    try {
+      const response = await api.post('/auth/register', {
+        nome,
+        email,
+        senha,
+        cpf,
+        rg,
+        cep,
+        rua,
+        bairro,
+        cidade
+      });
+      alert(response.data);
       reset();
       onToggle(); // Alterna para o formulário de Login após cadastro
+    } catch (error) {
+      if (error.response && error.response.data) {
+        alert(error.response.data);
+      } else {
+        alert('Erro ao cadastrar usuário.');
+      }
     }
   };
 
@@ -47,9 +57,9 @@ const Cadastro = ({ onToggle }) => {
         setValue('cidade', '');
       } else {
         setCepError('');
-        setValue('rua', data.logradouro || '');
-        setValue('bairro', data.bairro || '');
-        setValue('cidade', data.localidade || '');
+        setValue('rua', data.logradouro);
+        setValue('bairro', data.bairro);
+        setValue('cidade', data.localidade);
       }
     } catch (error) {
       setCepError('Erro ao buscar o CEP.');
@@ -103,6 +113,36 @@ const Cadastro = ({ onToggle }) => {
           {errors.senha && <p className="error">{errors.senha.message}</p>}
         </div>
         <div className="input-group">
+          <label>CPF:</label>
+          <input
+            type="text"
+            maxLength="11"
+            {...register('cpf', {
+              required: 'CPF é obrigatório.',
+              pattern: {
+                value: /^[0-9]{11}$/,
+                message: 'CPF deve conter 11 dígitos numéricos.'
+              }
+            })}
+          />
+          {errors.cpf && <p className="error">{errors.cpf.message}</p>}
+        </div>
+        <div className="input-group">
+          <label>RG:</label>
+          <input
+            type="text"
+            maxLength="9"
+            {...register('rg', {
+              required: 'RG é obrigatório.',
+              pattern: {
+                value: /^[0-9]{9}$/,
+                message: 'RG deve conter 9 dígitos numéricos.'
+              }
+            })}
+          />
+          {errors.rg && <p className="error">{errors.rg.message}</p>}
+        </div>
+        <div className="input-group">
           <label>CEP:</label>
           <input
             type="text"
@@ -118,7 +158,7 @@ const Cadastro = ({ onToggle }) => {
           />
           {errors.cep && <p className="error">{errors.cep.message}</p>}
           {cepError && <p className="error">{cepError}</p>}
-          {isLoadingCep && <p className="loading">Buscando CEP...</p>}
+          {isLoadingCep && <p>Buscando CEP...</p>}
         </div>
         <div className="input-group">
           <label>Rua:</label>
