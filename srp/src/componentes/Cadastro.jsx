@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import api from '../serve/api';
-import '../styles/Auth.css';
+import '../styles/Auth.css';    
 
 const Cadastro = ({ onToggle }) => {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();

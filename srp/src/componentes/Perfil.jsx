@@ -1,7 +1,7 @@
 // src/components/Profile.jsx
 import React, { useEffect, useState } from 'react';
-import './Profile.css';
-import api from '../services/api';
+import '../styles/Perfil.css';
+import api from '../serve/api';
 
 const Profile = () => {
   const [user, setUser] = useState({ nome: '', email: '' });

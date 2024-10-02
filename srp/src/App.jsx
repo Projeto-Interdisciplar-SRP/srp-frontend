@@ -1,11 +1,11 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './components/Login';
-import Cadastro from './components/Cadastro';
-import Profile from './components/Profile';
+import Login from '../src/componentes/Login';
+import Cadastro from '../src/componentes/Cadastro';
+import Profile from '../src/componentes/Perfil';
 import './App.css';
-import './components/Auth.css'; // Importa o CSS compartilhado
+import '../src/styles/Auth.css'; // Importa o CSS compartilhado
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
