@@ -26,24 +26,27 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/login" element={
-            isAuthenticated ? <Navigate to="/profile" /> : <Login onLoginSuccess={handleLoginSuccess} />
-          } />
-          <Route path="/cadastro" element={
-            isAuthenticated ? <Navigate to="/profile" /> : <Cadastro />
-          } />
-          <Route path="/profile" element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          } />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </div>
-    </Router>
+    <>
+      <Profile />
+    </>
+    // <Router>
+    //   <div className="app-container">
+    //     <Routes>
+    //       <Route path="/login" element={
+    //         isAuthenticated ? <Navigate to="/profile" /> : <Login onLoginSuccess={handleLoginSuccess} />
+    //       } />
+    //       <Route path="/cadastro" element={
+    //         isAuthenticated ? <Navigate to="/profile" /> : <Cadastro />
+    //       } />
+    //       <Route path="/profile" element={
+    //         <PrivateRoute>
+    //           <Profile />
+    //         </PrivateRoute>
+    //       } />
+    //       <Route path="*" element={<Navigate to="/login" />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
   );
 };
 

@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Perfil.css';
 import api from '../serve/api';
+import imgprofile from '../img/Male User.png'
+import qrcode from '../img/qrcode.jpeg'
 
 const Profile = () => {
   const [user, setUser] = useState({ nome: '', email: '' });
@@ -29,14 +31,40 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-container">
-      <h2>Meu Perfil</h2>
-      <div className="profile-info">
-        <p><strong>Nome:</strong> {user.nome}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-      </div>
-      <button className="logout-button" onClick={handleLogout}>Logout</button>
+    
+<div class="container">
+        <div class="profile">
+          <div className="profile-img-info">
+          <div className="img-profile">
+            <img src={imgprofile} alt="Profile"></img>
+            </div>
+            <div class="profile-info">
+                <h2>ISAÍAS B. DE SOUZA</h2>
+                <p>isaias@gmail.com</p>
+            </div>
+            </div>
+            <button class="edit-btn">Editar</button>
+        </div>
+
+        <div class="tickets-section">
+            <h3>Ingressos:</h3>
+            <div class="ticket">
+                <div class="ticket-info">
+                    <p><strong>ISAÍAS B. DE SOUZA</strong></p>
+                    <p>Local de Embarque: Paróquia São Benedito</p>
+                    <p>Local de Chegada: Aparecida do Norte</p>
+                    <p>Data: 10/10/2024</p>
+                    <p>Horário: 13:30 até as 22:00</p>
+                </div>
+                <div class="qr-code">
+                    <img src={qrcode} alt="qrcode"></img>
+                    <span class="ticket-quantity">x2</span>
+                </div>
+            </div>
+            <button class="cancel-btn">Cancelamento</button>
+        </div>
     </div>
+
   );
 };
 
