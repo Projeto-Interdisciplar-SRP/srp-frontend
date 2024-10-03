@@ -7,18 +7,24 @@ import '../styles/Auth.css';
 const Login = ({ onToggle, onLoginSuccess }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-   const onLogin = async (data) => {
+  const onLogin = async (data) => {
     const { email, senha } = data;
     try {
-      const response = await api.login(email, senha);
-      localStorage.setItem('token', response.token);
+      const response = await api.post('/auth/login', { email, senha });
+      const token = response.data.token;
+      // Armazenar o token no Local Storage ou em outro local seguro
+      localStorage.setItem('token', token);
       alert('Login bem-sucedido!');
       reset();
       if (onLoginSuccess) {
-        onLoginSuccess();
+        onLoginSuccess(); // Função para redirecionar ou atualizar o estado
       }
     } catch (error) {
-      alert(error);
+      if (error.response && error.response.data) {
+        alert(error.response.data);
+      } else {
+        alert('Erro ao fazer login.');
+      }
     }
   };
 
