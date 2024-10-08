@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // import Login from '../src/componentes/Login';
-import Cadastro from '../src/componentes/Cadastro';
-// import Profile from '../src/componentes/Perfil';
+// import Cadastro from '../src/componentes/Cadastro';
+import Profile from '../src/componentes/Perfil';
 import './App.css';
 import '../src/styles/Auth.css'; // Importa o CSS compartilhado
 
@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <>
-      <Cadastro />
+      <Profile />
     </>
     // <Router>
     //   <div className="app-container">
