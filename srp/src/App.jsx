@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 // import Login from '../src/componentes/Login';
 // import Cadastro from '../src/componentes/Cadastro';
 import Profile from '../src/componentes/Perfil';
+import Inicio from '../src/componentes/Inicio';
 import './App.css';
 import '../src/styles/Auth.css'; // Importa o CSS compartilhado
 
@@ -27,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <Profile />
+      <Inicio />
     </>
     // <Router>
     //   <div className="app-container">
