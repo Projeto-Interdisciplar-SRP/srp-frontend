@@ -33,6 +33,15 @@ const Inicio = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
 
+
+  const handleScroll = () => {
+    // Rola a página para a metade da altura total da janela
+    window.scrollTo({
+      top: window.innerHeight / 2, // A metade da altura da janela
+      behavior: "smooth", // Faz a rolagem suave
+    });
+  };
+
   return (
     <div class="container">
       <header>
@@ -42,7 +51,7 @@ const Inicio = () => {
         </div>
         <ul>
           <li>
-            <a href="/">Inicio</a>
+            <a onClick={handleScroll}>Inicio</a>
           </li>
           <li>
             <a href="">Sobre</a>
@@ -68,9 +77,9 @@ const Inicio = () => {
           <h1>Sua Viagem mais prática e segura</h1>
           <form action="" method="get">
             <input type="text" className="input-img1" placeholder="Cidade de origem" />
-            <input type="text" className="input-img2 che" placeholder="Aparecida do Norte" />
-            <input type="date" className="input-img3" placeholder="Ida" />
-            <input type="date" className="input-img4" placeholder="Volta" />
+            <input type="text" className="input-img2 che" placeholder="Aparecida do Norte" disabled/>
+            <input type="date" className="input-img3" placeholder="Ida" disabled/>
+            <input type="date" className="input-img4" placeholder="Volta" disabled/>
           </form>
         </div>
       </div>
