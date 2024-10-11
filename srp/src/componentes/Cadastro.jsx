@@ -1,7 +1,10 @@
 // src/components/Cadastro.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/Auth.css';    
+import '../styles/Auth.css';     
+import '../styles/Global.css';     
+import logoSol from "../img/Sun (1).png";
+
 
 const Cadastro = () => {
   const [nome, setNome] = useState('');
@@ -23,7 +26,7 @@ const Cadastro = () => {
     setMensagem('');
 
     try {
-      const resposta = await axios.post('https://5e17-2804-7f0-a218-1f0d-b8f2-469-7008-88cd.ngrok-free.app/user/register', dadosUsuario); // URL relativa com proxy
+      const resposta = await axios.post('https://b826-179-119-58-114.ngrok-free.app/user/register', dadosUsuario); // URL relativa com proxy
       setMensagem(resposta.data.message);
       setNome('');
       setEmail('');
@@ -42,21 +45,27 @@ const Cadastro = () => {
 
   // Retorno do JSX
   return (
-    <div>
-      <h2>Cadastro de Usuário</h2>
+    <div className="auth-container">
+    <div className='form-container' >
+    <div className="top">
+          <div className="logo-form">
+            <img src={logoSol} alt="Profile"></img>
+          </div>
+          <h2>Cadastro</h2>
+        </div>
       {mensagem && <p>{mensagem}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label><br />
-          <input
+        <div className="input-group">
+          <label>Nome:</label>
+          <input 
             type="text"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Email:</label><br />
+        <div className="input-group">
+          <label>Email:</label>
           <input
             type="email"
             value={email}
@@ -64,8 +73,8 @@ const Cadastro = () => {
             required
           />
         </div>
-        <div>
-          <label>Senha:</label><br />
+        <div className="input-group">
+          <label>Senha:</label>
           <input
             type="password"
             value={senha}
@@ -77,6 +86,7 @@ const Cadastro = () => {
           {carregando ? 'Cadastrando...' : 'Cadastrar'}
         </button>
       </form>
+    </div>
     </div>
   );
 };

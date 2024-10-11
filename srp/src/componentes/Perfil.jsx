@@ -6,32 +6,32 @@ import imgprofile from '../img/perfil.png'
 import imgIngresso from '../img/image 2.png'
 import logoSrp from '../img/SRP Viagens.png'
 import logoSol from '../img/Sun.png'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
-//   const [user, setUser] = useState({ nome: '', email: '' });
+  const [user, setUser] = useState({ nome: '', email: '' });
 
-//   useEffect(() => {
-//     const fetchUserProfile = async () => {
-//       try {
-//         const response = await api.get('/auth/profile');
-//         setUser({
-//           nome: response.data.nome,
-//           email: response.data.email,
-//         });
-//       } catch (error) {
-//         console.error(error);
-//         alert('Erro ao buscar os dados do perfil.');
-//       }
-//     };
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await api.get('/auth/profile');
+        setUser({
+          nome: response.data.nome,
+          email: response.data.email,
+        });
+      } catch (error) {
+        console.error(error);
+        alert('Erro ao buscar os dados do perfil.');
+      }
+    };
 
-//     fetchUserProfile();
-//   }, []);
+    fetchUserProfile();
+  }, []);
 
-//   const handleLogout = () => {
-//     localStorage.removeItem('token');
-//     window.location.href = '/login';
-//   };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  };
 
   return (
     
