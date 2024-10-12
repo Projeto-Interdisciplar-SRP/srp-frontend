@@ -8,30 +8,30 @@ import logoSrp from '../img/SRP Viagens.png'
 import logoSol from '../img/Sun.png'
 import { Link } from 'react-router-dom';
 
-const Profile = () => {
-  const [user, setUser] = useState({ nome: '', email: '' });
+const Profile = ({ usuario, onLogout }) => {
+  // const [user, setUser] = useState({ nome: '', email: '' });
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await api.get('/auth/profile');
-        setUser({
-          nome: response.data.nome,
-          email: response.data.email,
-        });
-      } catch (error) {
-        console.error(error);
-        alert('Erro ao buscar os dados do perfil.');
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserProfile = async () => {
+  //     try {
+  //       const response = await api.get('/auth/profile');
+  //       setUser({
+  //         nome: response.data.nome,
+  //         email: response.data.email,
+  //       });
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert('Erro ao buscar os dados do perfil.');
+  //     }
+  //   };
 
-    fetchUserProfile();
-  }, []);
+  //   fetchUserProfile();
+  // }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/login';
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   window.location.href = '/login';
+  // };
 
   return (
     
@@ -55,10 +55,11 @@ const Profile = () => {
             <img src={imgprofile} alt="Profile"></img>
             </div>
             <div class="profile-info">
-                <h2>ISAÍAS B. DE SOUZA</h2>
-                <p>isaias@gmail.com</p>
+                <h2>{usuario.nome}</h2>
+                <p>{usuario.email}</p>
             </div>
             </div>
+            <button onClick={onLogout}>Logout</button>
             <button class="edit-btn">Editar</button>
         </div>
 
@@ -66,7 +67,7 @@ const Profile = () => {
             <h3>Ingressos:</h3>
             <div class="ticket">
                 <div class="ticket-info">
-                    <p><strong>ISAÍAS B. DE SOUZA</strong></p>
+                    <p><strong>{usuario.nome}</strong></p>
                     <p>Local de Embarque: Paróquia São Benedito</p>
                     <p>Local de Chegada: Aparecida do Norte</p>
                     <p>Data: 10/10/2024</p>
