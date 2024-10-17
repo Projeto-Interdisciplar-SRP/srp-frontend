@@ -164,3 +164,11 @@ header .logo{
 .ticket-quantity {
   font-weight: bold;
 }
+
+.btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}

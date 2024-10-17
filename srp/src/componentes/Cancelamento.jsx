@@ -10,36 +10,6 @@ import logoSol from '../img/Sun.png'
 
 const Cancelamento = () => {
   return (
-    <div className="container">
-      <header>
-        <div className="logo">
-          <img src={logoSol} alt="Profile"></img>
-          <img src={logoSrp} alt="Profile"></img>
-        </div>
-        <ul>
-          <li>
-            <a>Inicio</a>
-          </li>
-          <li>
-            <a href="">Sobre</a>
-          </li>
-          <li>
-            <a href="">Viagem</a>
-          </li>
-          <li>
-            <a href="">Cancelamento</a>
-          </li>
-          <li>
-            <a href="">Ajuda</a>
-          </li>
-        </ul>
-        <div className="login-cadastro">
-          <button type="button">Entrar</button>
-          <button type="button" className="cadastro">
-            Cadastro
-          </button>
-        </div>
-      </header>
       <div className="auth-container">
         <div className="form-container">
           <div className="top">
@@ -68,10 +38,11 @@ const Cancelamento = () => {
               ></textarea>
             </div>
             <button type="submit">Cancelar</button>
+            <p>Foi engano? Clique no botão a baixo para voltar</p>
+            <button type="submit">Voltar</button>
           </form>
         </div>
       </div>
-    </div>
   );
 };
 

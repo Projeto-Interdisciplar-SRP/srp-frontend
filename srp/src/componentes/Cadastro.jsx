@@ -1,9 +1,12 @@
 // src/components/Cadastro.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/Auth.css';     
-import '../styles/Global.css';     
+import { useNavigate } from 'react-router-dom';  // Importando o hook useNavigate
+import '../styles/Cadastro.css';     
+// import '../styles/Global.css';     
 import logoSol from "../img/Sun (1).png";
+import logoHeaderSol from "../img/Sun.png";
+import logoHeaderLetras from "../img/SRP Viagens.png";
 
 const Cadastro = () => {
   const [nome, setNome] = useState('');
@@ -18,6 +21,8 @@ const Cadastro = () => {
   const [telefone, setTelefone] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [carregando, setCarregando] = useState(false);
+
+  const navigate = useNavigate();  // Inicializando o hook
 
   // Função para buscar endereço pelo CEP
   const buscarEndereco = async (cep) => {
@@ -40,7 +45,6 @@ const Cadastro = () => {
     }
   };
 
-  // Função para lidar com a mudança no campo CEP
   const handleCepChange = (e) => {
     const valorCep = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
     setCep(valorCep);
@@ -55,30 +59,17 @@ const Cadastro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Verificação de campos obrigatórios
     if (!nome || !email || !senha || !cep || !rua || !bairro || !cidade || !cpf || !rg || !telefone) {
       setMensagem('Por favor, preencha todos os campos.');
       return;
     }
 
-    const dadosUsuario = { 
-      nome, 
-      email, 
-      senha, 
-      cep, 
-      rua, 
-      bairro, 
-      cidade, 
-      cpf, 
-      rg, 
-      telefone 
-    };
+    const dadosUsuario = { nome, email, senha, cep, rua, bairro, cidade, cpf, rg, telefone };
     setCarregando(true);
     setMensagem('');
 
     try {
-      const resposta = await axios.post('https://3ae1-2804-7f0-a218-882-882d-1902-6573-abe1.ngrok-free.app/user/register', dadosUsuario); // URL relativa com proxy
+      const resposta = await axios.post('https://a3f8-2804-7f0-a218-110c-5dda-9acb-8dc3-272d.ngrok-free.app/user/register', dadosUsuario);
       setMensagem(resposta.data.message);
       // Resetar os campos
       setNome('');
@@ -91,6 +82,8 @@ const Cadastro = () => {
       setCpf('');
       setRg('');
       setTelefone('');
+      navigate('/login');
+
     } catch (error) {
       if (error.response) {
         setMensagem(`Erro: ${error.response.data.message}`);
@@ -103,17 +96,32 @@ const Cadastro = () => {
     }
   };
 
-  // Retorno do JSX
+  const handleGoToLogin = () => {
+    navigate('/login');  // Redireciona para a página de login
+  };
+
   return (
-    <div className="auth-container">
-      <div className='form-container' >
+    <div className="auth-container-cadastro">
+      <header className='header-cadastro'>
+        <div className="logo">
+        <img src={logoHeaderSol} alt="" />
+        <img src={logoHeaderLetras} alt="" />
+        </div>
+        
+        <div className="ir-login">
+          <p>Já possui conta?</p>
+          <button className="go-to-login-btn" onClick={handleGoToLogin}>
+           Login
+        </button>
+        </div>
+      </header>
+      <div className='form-container'>
         <div className="top">
           <div className="logo-form">
             <img src={logoSol} alt="Profile"></img>
           </div>
           <h2>Cadastro</h2>
         </div>
-        {mensagem && <p className="mensagem">{mensagem}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Nome:</label>
@@ -216,9 +224,10 @@ const Cadastro = () => {
               placeholder="Apenas números"
             />
           </div>
-          <button type="submit" disabled={carregando}>
+          <button type="submit" disabled={carregando} className='btn-cadastro'>
             {carregando ? 'Cadastrando...' : 'Cadastrar'}
           </button>
+          {mensagem && <p className="mensagem">{mensagem}</p>}
         </form>
       </div>
     </div>
