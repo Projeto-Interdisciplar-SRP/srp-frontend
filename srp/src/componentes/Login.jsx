@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../styles/Login.css';     
 import logoSol from "../img/Sun (1).png";
 
@@ -17,23 +18,36 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
     e.preventDefault();
     setMensagem(''); // Limpa mensagens anteriores
     setCarregando(true); // Inicia o estado de carregamento
-
+  
     // Verificação de campos obrigatórios
     if (!email || !senha) {
       setMensagem('Por favor, preencha todos os campos.');
       setCarregando(false);
       return;
     }
-
+  
+    // Verifica se o email e a senha são do admin
+    if (email === 'adm123@gmail.com' && senha === 'adm123@') {
+      setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Login Feito com Sucesso',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
+      navigate('/secretaria'); // Redireciona para a página da secretaria
+      return;
+    }
+  
     try {
-      const response = await fetch('https://a3f8-2804-7f0-a218-110c-5dda-9acb-8dc3-272d.ngrok-free.app/auth', {
+      const response = await fetch('https://f856-2804-7f0-a218-1d49-d1b1-bb20-c3c7-4cd0.ngrok-free.app/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, senha }),
       });
-
+  
       // Verifica se a resposta não foi bem sucedida
       if (!response.ok) {
         const errorResponse = await response.json(); // Captura a resposta de erro
@@ -41,9 +55,15 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
         setCarregando(false);
         return;
       }
-
+  
       const userData = await response.json();
       setUsuario(userData); // Armazena os dados do usuário
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Login Feito com Sucesso',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }); 
       navigate('/'); // Redireciona para o perfil após o login
     } catch (error) {
       console.error('Erro:', error);
@@ -51,7 +71,7 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
       setCarregando(false);
     }
   };
-
+  
   // Função para navegar até a página de cadastro
   const handleCadastroRedirect = () => {
     navigate('/cadastro');
@@ -68,7 +88,7 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
           <h2>Login</h2>
         </div>
         {mensagem && <p className="mensagem">{mensagem}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form-login'>
           <div className="input-group">
             <label>Email:</label>
             <input

@@ -12,8 +12,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: #9B9BA2 0.5px solid;
-    width: 400px;
     position: relative;
+    width: 50%;
   }
   
   .top{
@@ -106,6 +106,9 @@
     color: #333;
   }
 
+  input{
+    width: 100%;
+  }
 
   header{
     display: flex;
