@@ -45,7 +45,7 @@ const Secretaria = () => {
     e.preventDefault();
     try {
       // Envia os dados para a API
-      await axios.post("https://sua-api.com/coordenadores", coordenador);
+      await axios.post("/src/serve/coordenadores.json", coordenador);
       alert("Coordenador cadastrado com sucesso!");
       setCoordenador({
         nome: "",
@@ -55,6 +55,7 @@ const Secretaria = () => {
         dataNascimento: "",
         senha: "",
       });
+      navigate('/secretaria/crudcoordenador')
     } catch (error) {
       console.error("Erro ao cadastrar coordenador:", error);
       alert("Erro ao cadastrar coordenador.");

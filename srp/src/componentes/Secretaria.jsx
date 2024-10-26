@@ -30,7 +30,7 @@ const handleRelatorio = () => {
         <div className="inicio">
           <div className="CRUD">
             <h3>Coordenadores</h3>
-            <button onClick={handleCrudCoordenadores}>Ver coordenaores</button>
+            <button onClick={handleCrudCoordenadores}>Ver Coordenadores</button>
           </div>
           <div className="CRUD">
             <h3>Onibus</h3>
