@@ -1,39 +1,65 @@
+
 .welcome-container {
-    padding: 20px;
-    background-color: #f0f4f8;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  padding: 20px;
+  text-align: center;
+  margin-top: 200px;
+  justify-items: center;
+}
+
+.div-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.welcome-title {
+  color: #0e9fe7;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.welcome-subtitle {
+  color: #555;
+  font-size: 1.2rem;
+  padding: 30px;
+}
+
+.welcome-button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.welcome-button.cadastrar {
+  background-color: #0e9fe7;
+}
+
+.welcome-button.login {
+  background-color: #007bff;
+}
+
+@media (min-width: 800px) {
   
-  .welcome-title {
-    color: #333;
-    font-size: 2rem;
-    margin: 0;
+  .div-buttons {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .welcome-subtitle {
-    color: #555;
-    font-size: 1.2rem;
-    margin: 10px 0 20px;
+
+  .welcome-button{
+    margin:10px;
+    width: 200px;
   }
-  
-  .welcome-button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #fff;
+
+  .welcome-subtitle{
+    margin-left: 200px;
+    margin-right: 200px;
   }
-  
-  .welcome-button.cadastrar {
-    background-color: #007bff;
+
+  .login-cadastro button{
+    width: 400px !important;
   }
-  
-  .welcome-button.login {
-    background-color: #28a745;
-  }
-  
+
+}

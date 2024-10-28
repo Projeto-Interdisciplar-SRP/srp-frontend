@@ -3,11 +3,8 @@
   import axios from 'axios';
   import Swal from 'sweetalert2';
   import { useNavigate } from 'react-router-dom';  // Importando o hook useNavigate
-  import '../styles/Cadastro.css';     
-  // import '../styles/Global.css';     
+  import '../styles/Cadastro.css';    
   import logoSol from "../img/Sun (1).png";
-  import logoHeaderSol from "../img/Sun.png";
-  import logoHeaderLetras from "../img/SRP Viagens.png";
 
   const Cadastro = () => {
     const [nome, setNome] = useState('');
@@ -49,9 +46,9 @@
     };
 
     const handleCepChange = (e) => {
-      const valorCep = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+      const valorCep = e.target.value.replace(/\D/g, '');
       setCep(valorCep);
-      if (valorCep.length === 8) { // CEP no formato brasileiro possui 8 dígitos
+      if (valorCep.length === 8) {
         buscarEndereco(valorCep);
       } else {
         setRua('');
@@ -72,9 +69,11 @@
       setMensagem('');
 
       try {
+
         const resposta = await axios.post('https://f856-2804-7f0-a218-1d49-d1b1-bb20-c3c7-4cd0.ngrok-free.app/user/register', dadosUsuario);
+
         setMensagem(resposta.data.message);
-        // Resetar os campos
+        
         setNome('');
         setEmail('');
         setSenha('');
@@ -87,12 +86,14 @@
         setTelefone('');
         setAdm(0)
         setParoquia('')
+
         Swal.fire({
           title: 'Sucesso!',
           text: 'Cadastro Feito com Sucesso',
           icon: 'success',
           confirmButtonText: 'Ok'
         }); 
+
         navigate('/login');
 
       } catch (error) {
@@ -107,31 +108,14 @@
       }
     };
 
-    const handleGoToLogin = () => {
-      navigate('/login');  // Redireciona para a página de login
-    };
-
     return (
+
       <div className="auth-container">
-        <header className='header-cadastro'>
-          <div className="logo">
-          <img src={logoHeaderSol} alt="" />
-          <img src={logoHeaderLetras} alt="" />
-          </div>
-          
-          <div className="ir-login">
-            <p>Já possui conta?</p>
-            <button className="go-to-login-btn" onClick={handleGoToLogin}>
-            Login
-          </button>
-          </div>
-        </header>
-        <div className='form-container'>
           <div className="top">
             <div className="logo-form">
               <img src={logoSol} alt="Profile"></img>
             </div>
-            <h2>Cadastro</h2>
+            <h2>Cadastro Usuário</h2>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
@@ -241,7 +225,7 @@
             {mensagem && <p className="mensagem">{mensagem}</p>}
           </form>
         </div>
-      </div>
+
     );
   };
 

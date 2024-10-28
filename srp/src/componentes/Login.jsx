@@ -92,7 +92,6 @@ const Login = () => {
   // Retorno do JSX
   return (
     <div className="auth-container">
-      <div className='form-container'>
         <div className="top">
           <div className="logo-form">
             <img src={logoSol} alt="Logo" />
@@ -132,7 +131,6 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
   );
 };
 

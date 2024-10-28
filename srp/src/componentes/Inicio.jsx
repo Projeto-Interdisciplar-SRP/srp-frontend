@@ -43,6 +43,7 @@ const Inicio = () => {
     }
   
   */
+ 
   const user = useAuth();
 
   const handleNext = () => {

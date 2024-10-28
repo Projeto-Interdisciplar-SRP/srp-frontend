@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const usuarioLocalStorage = localStorage.getItem('usuario');
     
-    //se ter ele vai atribuir o valor pra gente conseguir pegar com o useAuth()..
+    //se ter ele vai atribuir o valor em usuarioLocalStorage pra gente conseguir pegar com o useAuth()..
     if (usuarioLocalStorage) {
 
       setDadosUsuario(JSON.parse(usuarioLocalStorage));
