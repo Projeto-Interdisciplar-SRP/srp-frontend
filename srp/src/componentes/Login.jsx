@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import '../styles/Login.css';     
 import logoSol from "../img/Sun (1).png";
 
-const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
+const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagem, setMensagem] = useState('');
@@ -40,22 +40,32 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
     }
   
     try {
-      const response = await fetch('https://f856-2804-7f0-a218-1d49-d1b1-bb20-c3c7-4cd0.ngrok-free.app/auth', {
+
+      
+        const fetched = await fetch(' https://c272-2804-7f0-a218-1d49-82a-b45-1706-6fc1.ngrok-free.app/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, senha }),
       });
-  
+
+      const response = await fetched.json();
+
       // Verifica se a resposta não foi bem sucedida
-      if (!response.ok) {
-        const errorResponse = await response.json(); // Captura a resposta de erro
-        setMensagem(errorResponse.message || 'Erro ao fazer login'); // Mostra mensagem de erro
+      if (response.status == false) {
+        
+        setMensagem(response.message || 'Erro ao fazer login'); // Mostra mensagem de erro
         setCarregando(false);
         return;
+
+      }else{
+
+        localStorage.setItem('usuario', JSON.stringify(response.data)) // Armazena os dados do usuário no localstorage
+        navigate('/inicio'); // Redireciona para o perfil após o login
+
       }
-  
+
       const userData = await response.json();
       setUsuario(userData); // Armazena os dados do usuário
       Swal.fire({
@@ -65,11 +75,13 @@ const Login = ({ setUsuario }) => {  // Recebe setUsuario como prop
         confirmButtonText: 'Ok'
       }); 
       navigate('/'); // Redireciona para o perfil após o login
+
     } catch (error) {
       console.error('Erro:', error);
       setMensagem('Login falhou. Tente novamente.'); // Alerta para falha no login
       setCarregando(false);
     }
+
   };
   
   // Função para navegar até a página de cadastro
