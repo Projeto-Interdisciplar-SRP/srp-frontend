@@ -6,6 +6,7 @@ import "../styles/Perfil.css";
 import "../styles/inicio.css";
 import logoSrp from "../img/SRP Viagens.png";
 import logoSol from "../img/Sun.png";
+
 import banner from "../img/banner-paroquia.png";
 import next from "../img/Forward.png";
 import back from "../img/Back.png";
@@ -16,11 +17,14 @@ import valor1 from "../img/Us Dollar Circled.png";
 import valor2 from "../img/Christian Cross.png";
 import valor3 from "../img/Shield.png";
 
+import Header from "./Header";
+
 const images = [img1, img2, img3];
 
 const Inicio = () => {
   const [current, setCurrent] = useState(0); // Começa na primeira imagem
   const navigate = useNavigate(); // Para navegação
+
 
   //ESSA É A VAR QUE TEM O LOCALSTORAGE.. RECUPERAMOS ELA NO CONTEXTO..
   /*
@@ -49,6 +53,7 @@ const Inicio = () => {
   const handlePrev = () => {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
+
 
   const handleScroll = () => {
     window.scrollTo({

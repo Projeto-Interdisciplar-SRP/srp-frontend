@@ -44,14 +44,7 @@ label {
   color: #555;
 }
 
-input {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
+
 
 button {
   padding: 10px;

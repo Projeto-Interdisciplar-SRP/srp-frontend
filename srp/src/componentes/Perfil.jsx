@@ -1,5 +1,6 @@
 // src/components/Profile.jsx
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import '../styles/Perfil.css';
 import imgprofile from '../img/perfil.png';
 import imgIngresso from '../img/image 2.png';
@@ -13,6 +14,16 @@ const Profile = () => {
 
   const handleCancel = () => {
     navigate('/perfil/cancelamento');  // Redireciona para a página de login
+  };
+
+  const handleLogout = () => {
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Você Deslogou',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }); 
+    navigate('/');  // Redireciona para a página de login
   };
   // const [usuario, setUsuario] = useState(null); // Estado para armazenar os dados do usuário
 
@@ -64,7 +75,7 @@ const Profile = () => {
         </div>
         <div className="btn">
         <button className="edit-btn">Editar</button>
-        <button className="edit-btn" onClick={onLogout}>Sair</button>
+        <button className="edit-btn" onClick={handleLogout}>Sair</button>
         </div>
       </div>
 

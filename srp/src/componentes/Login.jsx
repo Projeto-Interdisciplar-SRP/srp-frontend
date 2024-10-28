@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../styles/Login.css';     
 import logoSol from "../img/Sun (1).png";
 
@@ -17,17 +18,31 @@ const Login = () => {
     e.preventDefault();
     setMensagem(''); // Limpa mensagens anteriores
     setCarregando(true); // Inicia o estado de carregamento
-
+  
     // Verificação de campos obrigatórios
     if (!email || !senha) {
       setMensagem('Por favor, preencha todos os campos.');
       setCarregando(false);
       return;
     }
-
+  
+    // Verifica se o email e a senha são do admin
+    if (email === 'adm123@gmail.com' && senha === 'adm123@') {
+      setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Login Feito com Sucesso',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
+      navigate('/secretaria'); // Redireciona para a página da secretaria
+      return;
+    }
+  
     try {
+
       
-      const fetched = await fetch(' https://c272-2804-7f0-a218-1d49-82a-b45-1706-6fc1.ngrok-free.app/auth', {
+        const fetched = await fetch(' https://c272-2804-7f0-a218-1d49-82a-b45-1706-6fc1.ngrok-free.app/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +66,16 @@ const Login = () => {
 
       }
 
+      const userData = await response.json();
+      setUsuario(userData); // Armazena os dados do usuário
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Login Feito com Sucesso',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }); 
+      navigate('/'); // Redireciona para o perfil após o login
+
     } catch (error) {
       console.error('Erro:', error);
       setMensagem('Login falhou. Tente novamente.'); // Alerta para falha no login
@@ -58,7 +83,7 @@ const Login = () => {
     }
 
   };
-
+  
   // Função para navegar até a página de cadastro
   const handleCadastroRedirect = () => {
     navigate('/cadastro');
@@ -75,7 +100,7 @@ const Login = () => {
           <h2>Login</h2>
         </div>
         {mensagem && <p className="mensagem">{mensagem}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form-login'>
           <div className="input-group">
             <label>Email:</label>
             <input
