@@ -1,14 +1,9 @@
-.logo{
-  height: fit-content;
-  border-radius: 16px;
-  background-color: #0e9fe7;
-  padding: 15px;
-}
 
 .welcome-container {
   padding: 20px;
   text-align: center;
   margin-top: 200px;
+  justify-items: center;
 }
 
 .div-buttons {
@@ -61,6 +56,10 @@
   .welcome-subtitle{
     margin-left: 200px;
     margin-right: 200px;
+  }
+
+  .login-cadastro button{
+    width: 400px !important;
   }
 
 }

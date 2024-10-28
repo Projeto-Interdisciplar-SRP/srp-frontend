@@ -23,7 +23,6 @@ import SecretariaOnibus from '../src/componentes/Secretaria-CadastroOnibus';
 import SecretariaRelatorio from '../src/componentes/Secretaria-Relatorio';
 
 import Welcome from "../src/componentes/Welcome";
-import Inicio from '../src/componentes/Inicio'; 
 // import IngressoVenda from '../src/componentes/Venda'; 
 // import ProfileEditar from '../src/componentes/EditarPerfil';
 
@@ -46,6 +45,7 @@ const App = () => {
             </AuthProvider> 
           } />
           <Route path="/login" element={<Login/>}/>
+          
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/perfil" element={<Profile/>} />
           <Route path="/perfil/cancelamento" element={<Cancelamento />} />

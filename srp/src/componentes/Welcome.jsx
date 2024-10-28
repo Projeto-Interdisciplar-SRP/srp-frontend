@@ -9,12 +9,12 @@ const Welcome = () => {
 
   return (
     <div className="welcome-container">
-      <img className="logo" src={logoSol} />
+      <img className="logo-form" src={logoSol} />
       <h1 className="welcome-title">SRP</h1>
       <p className="welcome-subtitle">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       
       <div className="div-buttons">
-        <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Sou coordenador</button>
+        <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Sou Coordenador</button>
         <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Sou Passageiro</button>
         <button className="welcome-button login" onClick={() => navigate("/login")}>Entrar</button>
       </div>
