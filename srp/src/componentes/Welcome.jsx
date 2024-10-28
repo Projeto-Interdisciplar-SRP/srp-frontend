@@ -1,18 +1,24 @@
 import React from "react";
-import '../styles/Welcome.css'; // Importa o arquivo de estilo CSS
+import '../styles/Welcome.css';
 import { useNavigate } from "react-router-dom";
+import logoSol from "../img/Sun (1).png";
 
-const Welcome = ({ nome }) => {
+const Welcome = () => {
 
     const navigate = useNavigate()
 
   return (
     <div className="welcome-container">
-      <h1 className="welcome-title">Bem-vindo, {nome}!</h1>
-      <p className="welcome-subtitle">Estamos felizes em ter você aqui. 😊</p>
+      <img className="logo" src={logoSol} />
+      <h1 className="welcome-title">SRP</h1>
+      <p className="welcome-subtitle">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       
-      <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Cadastrar</button>
-      <button className="welcome-button login" onClick={() => navigate("/login")}>Login</button>
+      <div className="div-buttons">
+        <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Sou coordenador</button>
+        <button className="welcome-button cadastrar" onClick={() => navigate("/cadastro")}>Sou Passageiro</button>
+        <button className="welcome-button login" onClick={() => navigate("/login")}>Entrar</button>
+      </div>
+      
     </div>
   );
 };
