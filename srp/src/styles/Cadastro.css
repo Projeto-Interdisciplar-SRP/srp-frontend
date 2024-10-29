@@ -22,7 +22,7 @@ header .ir-login button{
 
 h2 {
   text-align: center;
-  color: #333;
+  color: #0E9FE7;
 }
 
 form {
@@ -55,16 +55,38 @@ button:disabled {
   background-color: #aaa;
 }
 
+.mensagem{
+  color: crimson;
+}
 
 p {
-  color: #0E9FE7;
   text-align: center;
+}
+
+#selectParoquia {
+  padding: 10px 15px; 
+  border: 1px solid #aaa; 
+  border-radius: 8px;
+  outline: none;
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer; 
+}
+
+#selectParoquia:focus {
+  border-color: #007BFF;
+  background-color: #fff;
 }
 
 @media (min-width: 800px) {
 
   .input-group input{
     width: 400px !important;
+  }
+
+  #selectParoquia{
+    width:400px
   }
 
   .auth-container form{

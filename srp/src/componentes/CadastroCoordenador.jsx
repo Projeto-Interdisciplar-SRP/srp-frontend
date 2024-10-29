@@ -7,7 +7,7 @@
   import logoSol from "../img/Sun (1).png";
   import env from '/env.js';
 
-  const Cadastro = () => {
+  const CadastroCoordenador = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -18,6 +18,7 @@
     const [cpf, setCpf] = useState('');
     const [rg, setRg] = useState('');
     const [telefone, setTelefone] = useState('');
+    const [paroquia, setParoquia] = useState('');
     const [mensagem, setMensagem] = useState('');
     const [carregando, setCarregando] = useState(false);
 
@@ -80,8 +81,8 @@
         cpf: cpf,
         rg: rg,
         telefone: telefone,
-        adm: 0,
-        id_paroquia: null
+        adm: 1,
+        id_paroquia: paroquia
       };
       
       setCarregando(true);
@@ -137,7 +138,7 @@
             <div className="logo-form">
               <img src={logoSol} alt="Profile"></img>
             </div>
-            <h2>Cadastro Usuário</h2>
+            <h2>Cadastro Coordenador</h2>
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -150,6 +151,7 @@
                 required
               />
             </div>
+
             <div className="input-group">
               <label>Email:</label>
               <input
@@ -159,6 +161,7 @@
                 required
               />
             </div>
+
             <div className="input-group">
               <label>Senha:</label>
               <input
@@ -168,6 +171,7 @@
                 required
               />
             </div>
+
             <div className="input-group">
               <label>CEP:</label>
               <input
@@ -179,6 +183,7 @@
                 placeholder="Somente números"
               />
             </div>
+
             <div className="input-group">
               <label>Rua:</label>
               <input
@@ -190,6 +195,7 @@
                 disabled={rua == ''}
               />
             </div>
+
             <div className="input-group">
               <label>Bairro:</label>
               <input
@@ -201,6 +207,7 @@
                 disabled={bairro == ''}
               />
             </div>
+
             <div className="input-group">
               <label>Cidade:</label>
               <input
@@ -212,6 +219,7 @@
                 disabled={cidade == ''}
               />
             </div>
+
             <div className="input-group">
               <label>CPF:</label>
               <input
@@ -223,6 +231,7 @@
                 placeholder="Apenas números"
               />
             </div>
+
             <div className="input-group">
               <label>RG:</label>
               <input
@@ -234,6 +243,7 @@
                 placeholder="Apenas números"
               />
             </div>
+
             <div className="input-group">
               <label>Telefone:</label>
               <input
@@ -245,10 +255,21 @@
                 placeholder="Apenas números"
               />
             </div>
+
+            <div className="input-group">
+                <label>Paróquia:</label>
+                <select name="selectParoquia" id="selectParoquia">
+                    <option value="none">Selecione..</option>
+                    <option value="1">Paróquia São Bento</option>
+                </select>
+            </div>
+
             <button type="submit" disabled={carregando} className='btn-cadastro'>
               {carregando ? 'Cadastrando...' : 'Cadastrar'}
             </button>
+
             {mensagem && <p className="mensagem">{mensagem}</p>}
+
           </form>
 
         </div>
@@ -256,4 +277,4 @@
     );
   };
 
-  export default Cadastro;
+  export default CadastroCoordenador;

@@ -1,33 +1,35 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from '../src/componentes/Auth';
+import { AuthProvider } from './componentes/Auth';
 // Telas do Usuario
-import Login from '../src/componentes/Login';
-import Cadastro from '../src/componentes/Cadastro';
-import Cancelamento from '../src/componentes/Cancelamento';
-import Profile from '../src/componentes/Perfil';
-import SobreDesenvolvedores from '../src/componentes/Sobre-Desenvolvedores'
-import Inicio from '../src/componentes/Inicio';
+import Login from './componentes/Login';
+import Cadastro from './componentes/Cadastro';
+import Cancelamento from './componentes/Cancelamento';
+import Profile from './componentes/Perfil';
+import SobreDesenvolvedores from './componentes/Sobre-Desenvolvedores'
+import Inicio from './componentes/Inicio';
 
 // Telas da Secretaria e dos Coordenadores
-import Secretaria from '../src/componentes/Secretaria';
-import SecretariaCoordenador from '../src/componentes/Secretaria-CadastroCoordenador';
-import CRUDCoordenador from '../src/componentes/Secretaria-CRUD-Coordenador';
-import CRUDOnibus from '../src/componentes/Secretaria-CRUD-Onubis';
-import CRUDIngresso from '../src/componentes/Secretaria-CRUD-Ingresso';
-import EditarIngresso from '../src/componentes/EditarIngresso';
-import EditarCoordenador from '../src/componentes/EditarCoordenador';
-import EditarOnibus from '../src/componentes/EditarOnibus';
-import SecretariaIngresso from '../src/componentes/Secretaria-CadastroIngresso';
-import SecretariaOnibus from '../src/componentes/Secretaria-CadastroOnibus';
-import SecretariaRelatorio from '../src/componentes/Secretaria-Relatorio';
+import Secretaria from './componentes/Secretaria';
+import SecretariaCoordenador from './componentes/Secretaria-CadastroCoordenador';
+import CRUDCoordenador from './componentes/Secretaria-CRUD-Coordenador';
+import CRUDOnibus from './componentes/Secretaria-CRUD-Onubis';
+import CRUDIngresso from './componentes/Secretaria-CRUD-Ingresso';
+import EditarIngresso from './componentes/EditarIngresso';
+import EditarCoordenador from './componentes/EditarCoordenador';
+import EditarOnibus from './componentes/EditarOnibus';
+import SecretariaIngresso from './componentes/Secretaria-CadastroIngresso';
+import SecretariaOnibus from './componentes/Secretaria-CadastroOnibus';
+import SecretariaRelatorio from './componentes/Secretaria-Relatorio';
+import CadastroCoordenador from './componentes/CadastroCoordenador';
 
-import Welcome from "../src/componentes/Welcome";
-// import IngressoVenda from '../src/componentes/Venda'; 
-// import ProfileEditar from '../src/componentes/EditarPerfil';
+import Welcome from "./componentes/Welcome";
+// import IngressoVenda from './componentes/Venda'; 
+// import ProfileEditar from './componentes/EditarPerfil';
 
 
 import '../src/styles/Auth.css'; // Importa o CSS compartilhado
+
 
 
 const App = () => {
@@ -47,6 +49,7 @@ const App = () => {
           <Route path="/login" element={<Login/>}/>
           
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/perfil" element={<Profile/>} />
           <Route path="/perfil/cancelamento" element={<Cancelamento />} />
           

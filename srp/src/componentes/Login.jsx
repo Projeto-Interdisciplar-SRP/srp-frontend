@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../styles/Login.css';     
 import logoSol from "../img/Sun (1).png";
+import env from '/env.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ const Login = () => {
     }
   
     // Verifica se o email e a senha são do admin
-    if (email === 'adm123@gmail.com' && senha === 'adm123@') {
+    if (email === env.credentials.master.email && senha === env.credentials.master.password) {
       setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
       Swal.fire({
         title: 'Sucesso!',
@@ -42,7 +43,7 @@ const Login = () => {
     try {
 
       
-        const fetched = await fetch(' https://c272-2804-7f0-a218-1d49-82a-b45-1706-6fc1.ngrok-free.app/auth', {
+        const fetched = await fetch(env.url.local+'/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
