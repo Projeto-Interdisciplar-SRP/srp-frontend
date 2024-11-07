@@ -30,19 +30,27 @@ const Login = () => {
     // Verifica se o email e a senha são do admin
     if (email === env.credentials.master.email && senha === env.credentials.master.password) {
       setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
+
       Swal.fire({
         title: 'Sucesso!',
-        text: 'Login Feito com Sucesso',
+        text: 'Olá secretária, vamos te redirecionar para a tela.',
         icon: 'success',
         confirmButtonText: 'Ok'
       });
+
+      localStorage.setItem('usuario', JSON.stringify(
+        {
+          email: "adm123@gmail.com",
+          secretaria: true
+        }
+      ))
+
       navigate('/secretaria'); // Redireciona para a página da secretaria
       return;
     }
   
     try {
 
-      
         const fetched = await fetch(env.url.local+'/auth', {
         method: 'POST',
         headers: {
@@ -66,16 +74,6 @@ const Login = () => {
         navigate('/inicio'); // Redireciona para o perfil após o login
 
       }
-
-      const userData = await response.json();
-      setUsuario(userData); // Armazena os dados do usuário
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Login Feito com Sucesso',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      }); 
-      navigate('/'); // Redireciona para o perfil após o login
 
     } catch (error) {
       console.error('Erro:', error);
@@ -131,7 +129,7 @@ const Login = () => {
           </button>
           </div>
         </form>
-      </div>
+    </div>
   );
 };
 

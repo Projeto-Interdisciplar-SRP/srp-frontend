@@ -1,5 +1,5 @@
 .cadastro-btn {
-  background-color: #ffffff;
+  background-color: #0E9FE6;
   color: white;
   border: none;
   padding: 10px;
@@ -7,12 +7,10 @@
   border-radius: 5px;
   width: 100%;
   font-size: 16px;
-  color: grey;
-  border: black solid 0.5px;
 }
 
 .cadastro-btn:hover {
-  background-color: #0E9FE7;
+  background-color: #007BFF;
   color: #ffffff;
 }
 

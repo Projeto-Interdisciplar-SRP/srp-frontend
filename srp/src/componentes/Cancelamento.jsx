@@ -1,7 +1,5 @@
 // src/components/Cadastro.jsx
 import React, { useState } from "react";
-// import axios from 'axios';
-import "../styles/Auth.css";
 import "../styles/Global.css";
 import logoSolForm from "../img/Sun (1).png";
 
