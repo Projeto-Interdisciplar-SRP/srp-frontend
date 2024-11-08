@@ -1,54 +1,18 @@
-/* Estilos para o cabeçalho da página */
-.title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
+/*cards*/
+.new-user-top-span{
+    display: flex;
+    gap:10
+  }
+  
+  .cards-bottom{
+    display: flex;
+    margin: 0px 600px 0px 600px;
+  }
 
-/* Estilos para o contêiner da tabela */
-.table-container {
-    margin: 20px;
-}
+  @media (max-width: 1500px) {
+    
+    .cards-bottom{
+        margin: 0;
+      }
 
-/* Estilos para a tabela */
-.user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Estilos para as células do cabeçalho */
-.table-header {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    text-align: left;
-    font-weight: bold;
-}
-
-/* Estilos para as células da tabela */
-.table-body td {
-    padding: 10px;
-    text-align: left;
-    border-top: 1px solid #ddd;
-}
-
-/* Estilos para as linhas alternadas da tabela */
-.table-body tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-/* Efeito de hover para as linhas da tabela */
-.table-body tr:hover {
-    background-color: #e2e6ea;
-}
-
-/* Estilos para o cabeçalho da página */
-.header {
-    margin-bottom: 30px;
-}
+  }

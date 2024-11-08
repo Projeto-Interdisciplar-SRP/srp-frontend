@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
 ::-webkit-input-placeholder {
   color: #56585b;
 }
@@ -16,12 +10,6 @@
 
 :-moz-placeholder {
   color: #56585b;
-}
-
-html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 body {
@@ -56,6 +44,7 @@ h1 {
   font-weight: 700;
   color: #fff;
   margin: 0 0 1.5rem;
+  margin: 20px !important;
 }
 
 i {
@@ -170,6 +159,10 @@ input[type="search"] {
   right: 0;
   padding: 25px 100px;
   color: #fff;
+}
+
+.title{
+  margin: 20px;
 }
 
 @media all and (max-width:800px) {

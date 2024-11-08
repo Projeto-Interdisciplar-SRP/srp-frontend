@@ -1,6 +1,6 @@
-// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './componentes/Auth';
+
 
 // Telas do Usuario
 import Login from './componentes/Login';

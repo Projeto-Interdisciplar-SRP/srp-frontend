@@ -5,7 +5,6 @@ import PessoaCoordenador from "./coordenador/PessoaCoordenador.jsx";
 import InicioSecretaria from "./secretaria/InicioSecretaria.jsx";
 import env from "/env.js";
 
-
 const Inicio = () => {
 
   //ESSA É A VAR QUE TEM O LOCALSTORAGE.. RECUPERAMOS ELA NO CONTEXTO..
