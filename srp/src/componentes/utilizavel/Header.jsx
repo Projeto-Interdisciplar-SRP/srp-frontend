@@ -1,8 +1,19 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/header.css";
 
-export default function Header({ which, page }) {
-  
+export default function Header({ which }) {
+  const navigate = useNavigate();
+
+  const CadastroOnibus = () => {
+    navigate('/secretaria/cadastro/onibus')
+}
+const CadastroIngressos = () => {
+    navigate('/secretaria/cadastro/viagem')
+}
+const CadastroCoordenadores = () => {
+    navigate('/secretaria/cadastro/coordenador')
+}
   useEffect(() => {
     let navbar = document.getElementById('navBar');
     let navBarWrapper = document.getElementById('navBarWrapper');
@@ -92,9 +103,9 @@ export default function Header({ which, page }) {
           <div className="menuIconWrapper" id="menuIconWrapper">
           </div>
           <ul className="navLink" id="navBar">
-            <li className="linkSelect"><a href="#section1" className="link">Sección 1</a></li>
-            <li className="linkSelect"><a href="#section2" className="link">Sección 2</a></li>
-            <li className="linkSelect"><a href="#section3" className="link">Sección 3</a></li>
+            <li className="linkSelect"onClick={CadastroCoordenadores}><a href="" className="link"> Cadastrar Coordenadores</a></li>
+            <li className="linkSelect" onClick={CadastroOnibus}><a href="" className="link">Cadastrar Onibus</a></li>
+            <li className="linkSelect"onClick={CadastroIngressos}><a href="" className="link">Cadastrar Viajem</a></li>
           </ul>
         </nav>
       );

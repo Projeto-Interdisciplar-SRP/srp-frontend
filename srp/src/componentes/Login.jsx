@@ -9,6 +9,7 @@ import env from '/env.js';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [usuario, setUsuario] = useState('');
   const [mensagem, setMensagem] = useState('');
   const [carregando, setCarregando] = useState(false);
 
@@ -26,8 +27,21 @@ const Login = () => {
       setCarregando(false);
       return;
     }
+
   
-    // Verifica se o email e a senha são do admin
+    try {
+
+        const fetched = await fetch(env.url.local+'/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const response = await fetched.json();
+
+      // Verifica se o email e a senha são do admin
     if (email === env.credentials.master.email && senha === env.credentials.master.password) {
       setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
 
@@ -48,18 +62,6 @@ const Login = () => {
       navigate('/secretaria'); // Redireciona para a página da secretaria
       return;
     }
-  
-    try {
-
-        const fetched = await fetch(env.url.local+'/auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, senha }),
-      });
-
-      const response = await fetched.json();
 
       // Verifica se a resposta não foi bem sucedida
       if (response.status == false) {
