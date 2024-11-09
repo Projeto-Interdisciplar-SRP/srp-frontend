@@ -1,7 +1,7 @@
 // Inicio.js
 import { useAuth } from "../componentes/Auth";
 import InicioUsuario from "./usuario/InicioUsuario.jsx";
-import PessoaCoordenador from "./coordenador/PessoaCoordenador.jsx";
+import PessoaCoordenador from "./coordenador/visao/PessoaCoordenador.jsx";
 import InicioSecretaria from "./secretaria/InicioSecretaria.jsx";
 import env from "/env.js";
 

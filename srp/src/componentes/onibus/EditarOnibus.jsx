@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../styles/Secretaria.css';
+import '../../styles/Secretaria.css';
 
 const EditarOnibus = () => {
   const { id } = useParams(); // Obtém o ID do ônibus a partir da URL
