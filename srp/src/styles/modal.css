@@ -11,6 +11,10 @@
     z-index: 1000;
   }
   
+  form{
+    gap:0 !important;
+  }
+
   .modal-content {
     background-color: white;
     padding: 20px;

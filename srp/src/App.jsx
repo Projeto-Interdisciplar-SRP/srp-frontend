@@ -8,12 +8,16 @@ import Cadastro from './componentes/Cadastro';
 import Cancelamento from './componentes/Cancelamento';
 import Profile from './componentes/Perfil';
 import Inicio from './componentes/Inicio';
+import OnibusCoordenador from './componentes/coordenador/visao/OnibusCoordenador';
+import ReservaCoordenador from './componentes/coordenador/visao/ReservaCoordenador';
 
 import CadastroCoordenador from './componentes/coordenador/CadastroCoordenador';
 import ConfirmarCoordenador from './componentes/coordenador/ConfirmarCoordenador';
 import DetalhesCoordenador from './componentes/coordenador/DetalhesCoordenador';
 import ListarCoodenador from './componentes/coordenador/ListaCoordenador';
 import EditarCoordenador from './componentes/coordenador/EditarCoordenador';
+
+import Sobre from "./componentes/Sobre.jsx";
 
 import Welcome from "./componentes/Welcome";
 
@@ -48,7 +52,14 @@ const App = () => {
           <Route path="/login" element={<Login/>}/>
           
           <Route path="/cadastro" element={<Cadastro />} />
+          
           <Route path="/cadastro/coordenador" element={<CadastroCoordenador />} />
+
+          <Route path="/sobre" element={<Sobre />} />
+
+          <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
+          <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
+          
           <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />
           <Route path="/secretaria/listar/coordenador" element={ <ListarCoodenador /> } />

@@ -5,60 +5,27 @@ import "../../styles/header.css";
 export default function Header({ which }) {
   const navigate = useNavigate();
 
-  const CadastroOnibus = () => {
-    navigate('/secretaria/cadastro/onibus')
-}
-const CadastroIngressos = () => {
-    navigate('/secretaria/cadastro/viagem')
-}
-const CadastroCoordenadores = () => {
-    navigate('/secretaria/cadastro/coordenador')
-}
-  useEffect(() => {
-    let navbar = document.getElementById('navBar');
-    let navBarWrapper = document.getElementById('navBarWrapper');
-    const menuIconWrapper = document.getElementById('menuIconWrapper');
+  function logOut() {
     
-    if (!navbar || !navBarWrapper || !menuIconWrapper) {
-      console.error('Elementos necessários não encontrados no DOM');
-      return;
-    }
-  
-    let aux = 0;
-  
-    // Evento de clique fora da navbar para fechar o menu
-    document.onclick = element => {
-      if (element.target.id !== 'menuIconWrapper' && element.target.id !== 'navBar') {
-        navbar.classList.remove('showMe');
-        menuIconWrapper.classList.remove('active');
-      }
-    };
-  
-    // Evento de rolagem para esconder navbar
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > aux) {
-        navBarWrapper.classList.add('ocultar');
-        navbar.classList.remove('showMe');
-        menuIconWrapper.classList.remove('active');
-      } else {
-        navBarWrapper.classList.remove('ocultar');
-      }
-  
-      aux = window.scrollY;
-    });
-  
-    // Evento de clique no menu para alternar a classe
-    menuIconWrapper.onclick = () => toggleEffect();
-  
-    // Adicionar evento para links
-    document.querySelectorAll('.linkSelect').forEach(el => el.setAttribute('onclick', 'toggleEffect()'));
-  
-    function toggleEffect() {
-      navbar.classList.toggle('showMe');
-      menuIconWrapper.classList.toggle('active');
-    }
-  
-  }, []);
+    localStorage.clear();
+    navigate("/");
+
+  }
+
+  const mobile_menu = (
+    <div className="">
+
+      <ul className="navLink" id="navBar">
+        <li className="linkSelect"><a href="/inicio" className="link">Pessoas</a></li>
+        <li className="linkSelect"><a href="#section2" className="link">Ônibus</a></li>
+        <li className="linkSelect"><a href="#section3" className="link">Reservas</a></li>
+        <li className="linkSelect"><a href="#section3" className="link">Sobre</a></li>
+        <li className="linkSelect"><a href="#section3" className="link">Sobre</a></li>
+        <li className="linkSelect"><a onClick={logOut} className="link">Sair</a></li>
+      </ul>
+
+    </div>
+  );
 
   switch (which) {
     case 'usuario':
@@ -70,9 +37,12 @@ const CadastroCoordenadores = () => {
           <div className="menuIconWrapper" id="menuIconWrapper">
           </div>
           <ul className="navLink" id="navBar">
-            <li className="linkSelect"><a href="#section1" className="link">Sección 1</a></li>
-            <li className="linkSelect"><a href="#section2" className="link">Sección 2</a></li>
-            <li className="linkSelect"><a href="#section3" className="link">Sección 3</a></li>
+            <li className="linkSelect"><a href="/inicio" className="link">Pessoas</a></li>
+            <li className="linkSelect"><a href="#section2" className="link">Ônibus</a></li>
+            <li className="linkSelect"><a href="#section3" className="link">Reservas</a></li>
+            <li className="linkSelect"><a href="#section3" className="link">Sobre</a></li>
+            <li className="linkSelect"><a href="#section3" className="link">Sobre</a></li>
+            <li className="linkSelect"><a onClick={logOut} className="link">Sair</a></li>
           </ul>
         </nav>
       );
@@ -86,10 +56,11 @@ const CadastroCoordenadores = () => {
           <div className="menuIconWrapper" id="menuIconWrapper">
           </div>
           <ul className="navLink" id="navBar">
-            <li className="linkSelect"><a href="#section1" className="link">Pessoas</a></li>
-            <li className="linkSelect"><a href="#section2" className="link">Ônibus</a></li>
-            <li className="linkSelect"><a href="#section3" className="link">Reservas</a></li>
-            <li className="linkSelect"><a href="#section3" className="link">Sobre</a></li>
+            <li className="linkSelect"><a href="/inicio" className="link">Pessoas</a></li>
+            <li className="linkSelect"><a href="/coordenador/onibus" className="link">Ônibus</a></li>
+            <li className="linkSelect"><a href="/coordenador/reservas" className="link">Reservas</a></li>
+            <li className="linkSelect"><a href="/sobre" className="link">Sobre</a></li>
+            <li className="linkSelect"><a onClick={logOut} className="link">Sair</a></li>
           </ul>
         </nav>
       );
@@ -103,27 +74,20 @@ const CadastroCoordenadores = () => {
           <div className="menuIconWrapper" id="menuIconWrapper">
           </div>
           <ul className="navLink" id="navBar">
-            <li className="linkSelect"onClick={CadastroCoordenadores}><a href="" className="link"> Cadastrar Coordenadores</a></li>
-            <li className="linkSelect" onClick={CadastroOnibus}><a href="" className="link">Cadastrar Onibus</a></li>
-            <li className="linkSelect"onClick={CadastroIngressos}><a href="" className="link">Cadastrar Viajem</a></li>
+            <li className="linkSelect"><a href="/secretaria/cadastro/coordenador" className="link"> Cadastrar Coordenadores</a></li>
+            <li className="linkSelect"><a href="/secretaria/cadastro/onibus" className="link">Cadastrar Onibus</a></li>
+            <li className="linkSelect"><a href="/secretaria/cadastro/coordenador" className="link">Cadastrar Viajem</a></li>
+            <li className="linkSelect"><a onClick={logOut} className="link">Sair</a></li>
           </ul>
         </nav>
       );
     
     default:
       return (
-        <nav className="navBarWrapper" id="navBarWrapper">
-          <div className="logoWrapper">
-            <div className="logo">SRP</div>
-          </div>
-          <div className="menuIconWrapper" id="menuIconWrapper">
-          </div>
-          <ul className="navLink" id="navBar">
-            <li className="linkSelect"><a href="#section1" className="link">Sección 1</a></li>
-            <li className="linkSelect"><a href="#section2" className="link">Sección 2</a></li>
-            <li className="linkSelect"><a href="#section3" className="link">Sección 3</a></li>
-          </ul>
-        </nav>
+        <h6>
+          SELECIONE O props "which" para saber que header é o utilizado
+        </h6>
       );
   }
+
 }

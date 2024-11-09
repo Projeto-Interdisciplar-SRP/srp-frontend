@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Header from "../utilizavel/Header";
-import Modal from "../utilizavel/Modal";
-import DataTable from "../utilizavel/DataTable";
-import Card from "../utilizavel/Card";
+import Header from "../../utilizavel/Header";
+import Modal from "../../utilizavel/Modal";
+import DataTable from "../../utilizavel/DataTable";
+import Card from "../../utilizavel/Card";
 
-import  "../../styles/pessoa_coordenador.css";
+import  "../../../styles/modelo_crud.css";
 import env from "/env.js";
 
 export default function PessoaCoordenador() {
@@ -199,7 +199,7 @@ export default function PessoaCoordenador() {
                 </form>
             </Modal>
 
-            <Header className="header" which="coordenador" page="pessoas" />
+            <Header className="header" which="coordenador" />
 
             <DataTable 
                 data={useUsers} 

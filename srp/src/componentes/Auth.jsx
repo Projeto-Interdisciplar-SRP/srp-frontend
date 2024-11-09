@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     if (usuarioLocalStorage) {
 
       setDadosUsuario(JSON.parse(usuarioLocalStorage));
+      
     } else {//se não ele joga o usuario pra o login de novo, ele n tem acesso a essa rota..
 
       navigate("/login");
