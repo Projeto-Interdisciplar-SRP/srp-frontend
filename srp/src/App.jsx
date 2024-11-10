@@ -8,6 +8,7 @@ import Cadastro from './componentes/Cadastro';
 import Cancelamento from './componentes/Cancelamento';
 import Profile from './componentes/Perfil';
 import Inicio from './componentes/Inicio';
+
 import OnibusCoordenador from './componentes/coordenador/visao/OnibusCoordenador';
 import ReservaCoordenador from './componentes/coordenador/visao/ReservaCoordenador';
 
@@ -24,7 +25,6 @@ import Welcome from "./componentes/Welcome";
 //Telas Secretaria
 import Secretaria from './componentes/secretaria/InicioSecretaria';
 
-
 import CadastroOnibus from './componentes/onibus/CadastroOnibus';
 import ListarOnibus from './componentes/onibus/CadastroOnibus';
 import EditarOnibus from './componentes/onibus/EditarOnibus';
@@ -34,6 +34,10 @@ import CadastroViagem from './componentes/viagem/CadastroViagem';
 import ListarViagem from './componentes/viagem/ListarViagem';
 import Editarviagem from './componentes/viagem/EditarViagem';
 import Detalhesviagem from './componentes/viagem/DetalhesViagem';
+
+import Pagamento from './componentes/Pagamento.jsx'
+
+import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
 
 const App = () => {
 
@@ -77,6 +81,10 @@ const App = () => {
           <Route path="/secretaria/listar/viagem" element={ <ListarViagem /> } />
           <Route path="/secretaria/listar/viagem/detalhes" element={ <Editarviagem /> } />
           <Route path="/secretaria/listar/viagem/editar" element={ <Detalhesviagem /> } />
+
+          <Route path="/pagamento" element={ <Pagamento /> } />
+          <Route path="/cancelamento" element={ <Cancelamento /> } />
+          <Route path="/relatorio" element={ <RelatórioPagamento /> } />
           
       </Routes>
     </Router>

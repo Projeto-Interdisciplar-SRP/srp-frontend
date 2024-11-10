@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import '../styles/Pagamento.css';
 
 const CheckoutPage = () => {
   const [nome, setNome] = useState('');
