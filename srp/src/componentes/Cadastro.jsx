@@ -3,11 +3,9 @@
   import axios from 'axios';
   import Swal from 'sweetalert2';
   import { useNavigate } from 'react-router-dom';  // Importando o hook useNavigate
-  import '../styles/Cadastro.css';     
-  // import '../styles/Global.css';     
+  import '../styles/Cadastro.css';    
   import logoSol from "../img/Sun (1).png";
-  import logoHeaderSol from "../img/Sun.png";
-  import logoHeaderLetras from "../img/SRP Viagens.png";
+  import env from '/env.js';
 
   const Cadastro = () => {
     const [nome, setNome] = useState('');
@@ -20,8 +18,6 @@
     const [cpf, setCpf] = useState('');
     const [rg, setRg] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [adm, setAdm] = useState('');
-    const [paroquia, setParoquia] = useState('');
     const [mensagem, setMensagem] = useState('');
     const [carregando, setCarregando] = useState(false);
 
@@ -29,8 +25,11 @@
 
     // Função para buscar endereço pelo CEP
     const buscarEndereco = async (cep) => {
+
       try {
+
         const resposta = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
         if (resposta.data.erro) {
           setMensagem('CEP não encontrado.');
           setRua('');
@@ -49,15 +48,19 @@
     };
 
     const handleCepChange = (e) => {
-      const valorCep = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+      const valorCep = e.target.value.replace(/\D/g, '');
+
       setCep(valorCep);
-      if (valorCep.length === 8) { // CEP no formato brasileiro possui 8 dígitos
+
+      if (valorCep.length === 8) {
         buscarEndereco(valorCep);
       } else {
         setRua('');
         setBairro('');
         setCidade('');
       }
+
     };
 
     const handleSubmit = async (e) => {
@@ -67,33 +70,49 @@
         return;
       }
 
-      const dadosUsuario = { nome, email, senha, cep, rua, bairro, cidade, cpf, rg, telefone };
+      const dadosUsuario = {
+        nome: nome,
+        email: email,
+        senha: senha,
+        rua: rua,
+        bairro: bairro,
+        cidade: cidade,
+        cpf: cpf,
+        rg: rg,
+        telefone: telefone,
+        adm: 0,
+        id_paroquia: null
+      };
+      
       setCarregando(true);
       setMensagem('');
 
       try {
-        const resposta = await axios.post('https://f856-2804-7f0-a218-1d49-d1b1-bb20-c3c7-4cd0.ngrok-free.app/user/register', dadosUsuario);
-        setMensagem(resposta.data.message);
-        // Resetar os campos
-        setNome('');
-        setEmail('');
-        setSenha('');
-        setCep('');
-        setRua('');
-        setBairro('');
-        setCidade('');
-        setCpf('');
-        setRg('');
-        setTelefone('');
-        setAdm(0)
-        setParoquia('')
-        Swal.fire({
-          title: 'Sucesso!',
-          text: 'Cadastro Feito com Sucesso',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }); 
-        navigate('/login');
+
+        const resposta = await axios.post(env.url.local + '/user/register', dadosUsuario);
+        
+        if (resposta.data.status == true) {
+
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Cadastro Feito com Sucesso!',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+          }).then((result) => {
+  
+            if (result.isConfirmed) {
+              
+              navigate('/login', { state: { recemRegistrado: true } })
+  
+            }
+  
+          }); 
+
+        }else{
+
+          setMensagem(resposta.data.message);
+
+        }
 
       } catch (error) {
         if (error.response) {
@@ -102,37 +121,25 @@
           setMensagem(`Erro de conexão: ${error.message}`);
         }
         console.error('Erro:', error);
+
       } finally {
+
         setCarregando(false);
+
       }
     };
 
-    const handleGoToLogin = () => {
-      navigate('/login');  // Redireciona para a página de login
-    };
-
     return (
+
       <div className="auth-container">
-        <header className='header-cadastro'>
-          <div className="logo">
-          <img src={logoHeaderSol} alt="" />
-          <img src={logoHeaderLetras} alt="" />
-          </div>
-          
-          <div className="ir-login">
-            <p>Já possui conta?</p>
-            <button className="go-to-login-btn" onClick={handleGoToLogin}>
-            Login
-          </button>
-          </div>
-        </header>
-        <div className='form-container'>
+
           <div className="top">
             <div className="logo-form">
               <img src={logoSol} alt="Profile"></img>
             </div>
-            <h2>Cadastro</h2>
+            <h2>Cadastro Usuário</h2>
           </div>
+
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label>Nome:</label>
@@ -169,7 +176,7 @@
                 onChange={handleCepChange}
                 maxLength="8"
                 required
-                placeholder="Apenas números"
+                placeholder="Somente números"
               />
             </div>
             <div className="input-group">
@@ -179,7 +186,8 @@
                 value={rua}
                 onChange={(e) => setRua(e.target.value)}
                 required
-                readOnly={rua !== ''}
+                placeholder="Digite seu CEP"
+                disabled={rua == ''}
               />
             </div>
             <div className="input-group">
@@ -189,7 +197,8 @@
                 value={bairro}
                 onChange={(e) => setBairro(e.target.value)}
                 required
-                readOnly={bairro !== ''}
+                placeholder="Digite seu CEP"
+                disabled={bairro == ''}
               />
             </div>
             <div className="input-group">
@@ -199,7 +208,8 @@
                 value={cidade}
                 onChange={(e) => setCidade(e.target.value)}
                 required
-                readOnly={cidade !== ''}
+                placeholder="Digite seu CEP"
+                disabled={cidade == ''}
               />
             </div>
             <div className="input-group">
@@ -240,8 +250,9 @@
             </button>
             {mensagem && <p className="mensagem">{mensagem}</p>}
           </form>
+
         </div>
-      </div>
+
     );
   };
 

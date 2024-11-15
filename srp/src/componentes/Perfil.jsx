@@ -8,7 +8,7 @@ import logoSrp from '../img/SRP Viagens.png';
 import logoSol from '../img/Sun.png';
 import { useNavigate } from 'react-router-dom'; 
 
-const Profile = ({ onLogout }) => {
+const Profile = () => {
 
   const navigate = useNavigate();  // Inicializando o hook
 

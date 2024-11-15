@@ -7,22 +7,7 @@ import logoSol from '../img/Sun.png';
 const Secretaria = () => {
   
 const navigate = useNavigate();
-
-const handleCadCoordenador = () => {
-    navigate('/secretaria/cadcoordenador');
-};
-const handleCadOnibus = () => {
-    navigate('/secretaria/cadonibus');
-};
-const handleRelatorio = () => {
-    navigate('/secretaria/relatorio');
-};
-const handleCadIngresso = () => {
-    navigate('/secretaria/cadingresso');
-};
-const handleVoltar = () => {
-  navigate("/secretaria");
-};
+  
 
 const cadastrarOnibus = async (dadosOnibus) => {
   try {

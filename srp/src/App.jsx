@@ -1,68 +1,95 @@
-// src/App.jsx
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from '../src/componentes/Auth';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './componentes/Auth';
+
+
 // Telas do Usuario
-import Login from '../src/componentes/Login';
-import Cadastro from '../src/componentes/Cadastro';
-import Cancelamento from '../src/componentes/Cancelamento';
-import Profile from '../src/componentes/Perfil';
-import SobreDesenvolvedores from '../src/componentes/Sobre-Desenvolvedores'
-import Inicio from '../src/componentes/Inicio';
+import Login from './componentes/Login';
+import Cadastro from './componentes/Cadastro';
+import Cancelamento from './componentes/Cancelamento';
+import Profile from './componentes/Perfil';
+import Inicio from './componentes/Inicio';
 
-// Telas da Secretaria e dos Coordenadores
-import Secretaria from '../src/componentes/Secretaria';
-import SecretariaCoordenador from '../src/componentes/Secretaria-CadastroCoordenador';
-import CRUDCoordenador from '../src/componentes/Secretaria-CRUD-Coordenador';
-import CRUDOnibus from '../src/componentes/Secretaria-CRUD-Onubis';
-import CRUDIngresso from '../src/componentes/Secretaria-CRUD-Ingresso';
-import EditarIngresso from '../src/componentes/EditarIngresso';
-import EditarCoordenador from '../src/componentes/EditarCoordenador';
-import EditarOnibus from '../src/componentes/EditarOnibus';
-import SecretariaIngresso from '../src/componentes/Secretaria-CadastroIngresso';
-import SecretariaOnibus from '../src/componentes/Secretaria-CadastroOnibus';
-import SecretariaRelatorio from '../src/componentes/Secretaria-Relatorio';
+import OnibusCoordenador from './componentes/coordenador/visao/OnibusCoordenador';
+import ReservaCoordenador from './componentes/coordenador/visao/ReservaCoordenador';
 
+import CadastroCoordenador from './componentes/coordenador/CadastroCoordenador';
+import ConfirmarCoordenador from './componentes/coordenador/ConfirmarCoordenador';
+import DetalhesCoordenador from './componentes/coordenador/DetalhesCoordenador';
+import ListarCoodenador from './componentes/coordenador/ListaCoordenador';
+import EditarCoordenador from './componentes/coordenador/EditarCoordenador';
 
-import './App.css';
-import '../src/styles/Auth.css'; // Importa o CSS compartilhado
+import Sobre from "./componentes/Sobre.jsx";
 
+import Welcome from "./componentes/Welcome";
+
+//Telas Secretaria
+import Secretaria from './componentes/secretaria/InicioSecretaria';
+
+import CadastroOnibus from './componentes/onibus/CadastroOnibus';
+import ListarOnibus from './componentes/onibus/CadastroOnibus';
+import EditarOnibus from './componentes/onibus/EditarOnibus';
+import DetalhesOnibus from './componentes/onibus/DetalhesOnibus';
+
+import CadastroViagem from './componentes/viagem/CadastroViagem';
+import ListarViagem from './componentes/viagem/ListarViagem';
+import Editarviagem from './componentes/viagem/EditarViagem';
+import Detalhesviagem from './componentes/viagem/DetalhesViagem';
+
+import Pagamento from './componentes/Pagamento.jsx'
+
+import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
 
 const App = () => {
-  const [usuario, setUsuario] = useState(null); // Estado para armazenar o usuário
 
+  return (
+    <Router>
+      <Routes>
+      
+          <Route path="/" element={<Welcome/>}/>
 
+          {/*ROTA AUTENTICADA (PRECISA ESTAR AUTENTICADO)*/}
+          {/*QUANDO VOCE VER ESSE <AuthProvider> QUER DIZER QUE PRECISA ESTAR AUTENTICADO..*/}
+          <Route path="/inicio" element={<AuthProvider> <Inicio /> </AuthProvider>}/>          
+          <Route path="/perfil" element={<AuthProvider> <Profile /> </AuthProvider>}/>          
+          <Route path="/perfil/cancelamento"element={<AuthProvider> <Cancelamento /> </AuthProvider>}/>
 
-
-    return (
-      <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/secretaria" element={<Secretaria />} />
-
-          <Route path="/secretaria/cadcoordenador" element={<SecretariaCoordenador />} />
-          <Route path="/secretaria/crudcoordenador" element={<CRUDCoordenador />} />
-          <Route path="/secretaria/crudcoordenador/editarcoordenador/:id" element={<EditarCoordenador />} />
-
-          <Route path="/secretaria/cadonibus" element={<SecretariaOnibus />} />
-          <Route path="/secretaria/crudonibus" element={<CRUDOnibus />} />
-          <Route path="/secretaria/editaronibus/:id" element={<EditarOnibus />} />
-
-          <Route path="/secretaria/relatorio" element={<SecretariaRelatorio />} />
-
-          <Route path="/secretaria/cadingresso" element={<SecretariaIngresso />} />
-          <Route path="/secretaria/crudingresso" element={<CRUDIngresso />} />
-          <Route path="/secretaria/editaringresso/:id" element={<EditarIngresso />} />
+          <Route path="/login" element={<Login/>}/>
           
-          <Route path="/login" element={<Login setUsuario={setUsuario}/>} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/perfil" element={<Profile usuario={usuario}/>} />
-          <Route path="/perfil/cancelamento" element={<Cancelamento />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-    );
+          
+          <Route path="/cadastro/coordenador" element={<CadastroCoordenador />} />
+
+          <Route path="/sobre" element={<Sobre />} />
+
+          <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
+          <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
+          
+          <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
+          <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />
+          <Route path="/secretaria/listar/coordenador" element={ <ListarCoodenador /> } />
+          <Route path="/secretaria/listar/coordenador/detalhes" element={ <DetalhesCoordenador /> } />
+          <Route path="/secretaria/listar/coordenador/editar" element={ <EditarCoordenador /> } />
+
+          <Route path="/secretaria" element={<AuthProvider> <Secretaria /> </AuthProvider>} />
+
+          <Route path="/secretaria/cadastro/onibus" element={ <CadastroOnibus /> } />
+          <Route path="/secretaria/listar/onibus" element={ <ListarOnibus /> } />
+          <Route path="/secretaria/listar/onibus/detalhes" element={ <DetalhesOnibus /> } />
+          <Route path="/secretaria/listar/onibus/editar" element={ <EditarOnibus /> } />
+
+          <Route path="/secretaria/cadastro/viagem" element={ <CadastroViagem /> } />
+          <Route path="/secretaria/listar/viagem" element={ <ListarViagem /> } />
+          <Route path="/secretaria/listar/viagem/detalhes" element={ <Editarviagem /> } />
+          <Route path="/secretaria/listar/viagem/editar" element={ <Detalhesviagem /> } />
+
+          <Route path="/pagamento" element={ <Pagamento /> } />
+          <Route path="/cancelamento" element={ <Cancelamento /> } />
+          <Route path="/relatorio" element={ <RelatórioPagamento /> } />
+          
+      </Routes>
+    </Router>
+  );
+
 };
 
 export default App;
