@@ -1,0 +1,71 @@
+.edit-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-editar{
+    width: 100%;
+  }
+
+  
+  .logo-btn-voltar{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+
+  .btn-back:hover{
+    border: none;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+    /* width: 100%; */
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .input-group input {
+    width: 150%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button.btn-editar {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button.btn-editar:disabled {
+    background: #ccc;
+  }
+  
+  .mensagem {
+    margin-top: 15px;
+    text-align: center;
+    color: #d9534f;
+  }
+  

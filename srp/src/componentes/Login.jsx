@@ -31,11 +31,12 @@ const Login = () => {
   
     try {
 
-        const fetched = await fetch(env.url.local+'/auth', {
+        const fetched = await fetch(env.url.local +'/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
         body: JSON.stringify({ email, senha }),
       });
 
@@ -96,7 +97,8 @@ const Login = () => {
 
   // Retorno do JSX
   return (
-    <div className="auth-container">
+    <div className="login-container">
+      <div className="login">
         <div className="top">
           <div className="logo-form">
             <img src={logoSol} alt="Logo" />
@@ -135,6 +137,7 @@ const Login = () => {
           </button>
           </div>
         </form>
+        </div>
     </div>
   );
 };

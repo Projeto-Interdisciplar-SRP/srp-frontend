@@ -76,7 +76,7 @@ header{
   width:0;
   transition: width .5s;
   height:3px;
-  background: #000;
+  /* background: #000; */
 }
 
 .link:hover::after{

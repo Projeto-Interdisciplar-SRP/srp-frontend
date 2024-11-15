@@ -7,6 +7,7 @@ import Login from './componentes/Login';
 import Cadastro from './componentes/Cadastro';
 import Cancelamento from './componentes/Cancelamento';
 import Profile from './componentes/Perfil';
+import EditarPerfil from './componentes/EditarPerfil.jsx';
 import Inicio from './componentes/Inicio';
 
 import OnibusCoordenador from './componentes/coordenador/visao/OnibusCoordenador';
@@ -51,6 +52,7 @@ const App = () => {
           {/*QUANDO VOCE VER ESSE <AuthProvider> QUER DIZER QUE PRECISA ESTAR AUTENTICADO..*/}
           <Route path="/inicio" element={<AuthProvider> <Inicio /> </AuthProvider>}/>          
           <Route path="/perfil" element={<AuthProvider> <Profile /> </AuthProvider>}/>          
+          <Route path="/perfil/editar" element={<AuthProvider> <EditarPerfil /> </AuthProvider>}/>          
           <Route path="/perfil/cancelamento"element={<AuthProvider> <Cancelamento /> </AuthProvider>}/>
 
           <Route path="/login" element={<Login/>}/>
