@@ -77,6 +77,10 @@ const Login = () => {
 
       }
 
+      const dadosUsuario = await response.json(); // Exemplo: { id: '123', nome: 'Isaias', email: 'isaiaslindo@gmail.com' }
+      localStorage.setItem("usuario", JSON.stringify(dadosUsuario)); // Armazena os dados no localStorage
+      return dadosUsuario;
+      
     } catch (error) {
       console.error('Erro:', error);
       setMensagem('Login falhou. Tente novamente.'); // Alerta para falha no login

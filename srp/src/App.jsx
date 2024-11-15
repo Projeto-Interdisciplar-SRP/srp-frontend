@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './componentes/Auth';
+import { AuthProvider } from './componentes/Auths/Auth';
 
 
 // Telas do Usuario

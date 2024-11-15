@@ -187,7 +187,7 @@
                 onChange={(e) => setRua(e.target.value)}
                 required
                 placeholder="Digite seu CEP"
-                disabled={rua == ''}
+                // disabled={rua == ''}
               />
             </div>
             <div className="input-group">
@@ -198,7 +198,7 @@
                 onChange={(e) => setBairro(e.target.value)}
                 required
                 placeholder="Digite seu CEP"
-                disabled={bairro == ''}
+                // disabled={bairro == ''}
               />
             </div>
             <div className="input-group">
@@ -209,7 +209,7 @@
                 onChange={(e) => setCidade(e.target.value)}
                 required
                 placeholder="Digite seu CEP"
-                disabled={cidade == ''}
+                // disabled={cidade == ''}
               />
             </div>
             <div className="input-group">

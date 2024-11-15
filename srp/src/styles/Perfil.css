@@ -3,19 +3,8 @@
   padding: 0px;
   border-radius: 10px;
   height: 100dvh;
-  margin: 0 ;
-}
-
-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 10dvh;
-  /* width: 100%; */
-  position: relative;
-  /* right: 15%; */
-  /* width: 50%; */
-  box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.3); ;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 header ul{
@@ -42,11 +31,9 @@ header .logo{
 .profile {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   justify-content: space-between;
-  margin-top: 20px;
-  width: 80%;
-  margin-left: 10%;
+  width: 90%;
+  height: 10dvh;
 }
 
 .profile-img-info{
@@ -65,7 +52,6 @@ header .logo{
 
 .profile img {
   width: 70%;
-  
 }
 
 .profile-info {
@@ -87,10 +73,7 @@ header .logo{
   color: #666;
 }
 
-.edit-btn {
-  background-color: #faf6f6;
-  color: #1d1d1d;
-  border: #1d1d1d 1px solid;
+.edit-btn, .back-btn {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -99,13 +82,28 @@ header .logo{
   width: 75px;
   height: 30px;
 }
+button.edit-btn{
+  background-color: #0E9FE7;
+}
+button.edit-btn:hover{
+  background-color: #0a7ab3;
+}
+button.back-btn{
+  background-color: #e70e0e;
+}
+button.back-btn:hover{
+  background-color: #b61414;
+  border: none;
+}
 
 .tickets-section {
-  margin-top: 20px;
+  width: 100%;
+  margin: 0;
 }
 
 .tickets-section h3{
   color: black;
+  text-align: left;
   margin-left: 10%;
 }
 
@@ -171,4 +169,10 @@ header .logo{
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+}
+
+button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
