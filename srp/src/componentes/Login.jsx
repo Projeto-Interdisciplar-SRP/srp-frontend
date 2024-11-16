@@ -43,26 +43,27 @@ const Login = () => {
       const response = await fetched.json();
 
       // Verifica se o email e a senha são do admin
-    if (email === env.credentials.master.email && senha === env.credentials.master.password) {
-      setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
+      if (email === env.credentials.master.email && senha === env.credentials.master.password) {
+        setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
 
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Olá secretária, vamos te redirecionar para a tela.',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      });
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Olá secretária, vamos te redirecionar para a tela.',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
 
-      localStorage.setItem('usuario', JSON.stringify(
-        {
-          email: "adm123@gmail.com",
-          secretaria: true
-        }
-      ))
+        localStorage.setItem('usuario', JSON.stringify(
+          {
+            id: 'secretaria',
+            email: "adm123@gmail.com",
+            secretaria: true
+          }
+        ))
 
-      navigate('/secretaria'); // Redireciona para a página da secretaria
-      return;
-    }
+        navigate('/secretaria'); // Redireciona para a página da secretaria
+        return;
+      }
 
       // Verifica se a resposta não foi bem sucedida
       if (response.status == false) {

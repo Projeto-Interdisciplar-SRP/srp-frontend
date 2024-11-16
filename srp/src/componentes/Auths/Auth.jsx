@@ -21,12 +21,14 @@ export const AuthProvider = ({ children }) => {
 
     if (usuarioLocalStorage) {
       const dados = JSON.parse(usuarioLocalStorage);
+
       if (dados.id) { // Certifica-se de que o ID está presente
         setDadosUsuario(dados);
       } else {
         console.error("ID do usuário não encontrado.");
         navigate("/login");
       }
+      
     } else {
       navigate("/login");
     }
