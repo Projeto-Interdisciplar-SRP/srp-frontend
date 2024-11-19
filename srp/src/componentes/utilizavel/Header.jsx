@@ -50,6 +50,7 @@ export default function Header({ which }) {
   );
 
   switch (which) {
+
     case "usuario":
       return (
         <header>
@@ -130,26 +131,42 @@ export default function Header({ which }) {
           </div>
           <div className="menuIconWrapper" id="menuIconWrapper"></div>
           <ul className="navLink" id="navBar">
+
             <li className="linkSelect">
-              <a href="/secretaria/cadastro/coordenador" className="link">
-                {" "}
-                Cadastrar Coordenadores
+              <a href="/inicio" className="link">
+                Inicio
               </a>
             </li>
+
+            <li className="linkSelect">
+              <a href="/secretaria/onibus" className="link">
+                Onibus
+              </a>
+            </li>
+
             <li className="linkSelect">
               <a href="/secretaria/cadastro/onibus" className="link">
                 Cadastrar Onibus
               </a>
             </li>
+
+            <li className="linkSelect">
+              <a href="/secretaria/cadastro/onibus" className="link">
+                Cadastrar Onibus
+              </a>
+            </li>
+
             <li className="linkSelect">
               <a href="/secretaria/cadastro/coordenador" className="link">
                 Cadastrar Viajem
               </a>
             </li>
+
             <li className="linkSelect">
               <a onClick={logOut} className="link">
                 Sair
               </a>
+
             </li>
           </ul>
         </nav>

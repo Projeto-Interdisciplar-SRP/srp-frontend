@@ -21,6 +21,7 @@ const CadastroCoordenador = () => {
   const [paroquia, setParoquia] = useState('none');
   const [mensagem, setMensagem] = useState('');
   const [carregando, setCarregando] = useState(false);
+  const [useLocal, setLocal] = useState([{}]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -131,6 +132,25 @@ const CadastroCoordenador = () => {
     }
   };
 
+  const chaseLocals = async () => {
+
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers:{
+        'ngrok-skip-browser-warning': true
+      }
+    };
+    
+    fetch(env.url.local + "/local/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => 
+        setLocal(result.data)
+      )
+      .catch((error) => console.error(error));
+
+  }
+
   useEffect(() => {
 
     function verifyIfIsCoordinator() {
@@ -144,6 +164,8 @@ const CadastroCoordenador = () => {
       }
 
     }
+
+    chaseLocals()
 
     verifyIfIsCoordinator();
 
@@ -279,7 +301,11 @@ const CadastroCoordenador = () => {
               <label>Paróquia:</label>
               <select name="selectParoquia" id="selectParoquia" value={paroquia} onChange={(e) => setParoquia(e.target.value)}>
                   <option value="none">Selecione..</option>
-                  <option value="64bfc9207e1a4b2f9e6dcd89">Paróquia São Bento</option>
+                  {
+                    useLocal.map((element, index) => {
+                      return <option key={index} value={element.id}>{element.nome}</option>
+                    })
+                  }
               </select>
           </div>
 

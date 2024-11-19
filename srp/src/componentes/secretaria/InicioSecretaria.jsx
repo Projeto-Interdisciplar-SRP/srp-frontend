@@ -11,7 +11,7 @@ export default function InicioSecretaria() {
         navigate('/secretaria/cadastro/ingressos')
     }
     const CadastroCoordenadores = () => {
-        navigate('/secretaria/cadastro/coordenares')
+        navigate('/secretaria/coordenador')
     }
     
     return (

@@ -185,6 +185,7 @@ const Cadastro = () => {
               />
             </div>
           </div>
+          
           <div className="input-login">
             <div className="input-group">
               <label>CEP:</label>
@@ -197,6 +198,7 @@ const Cadastro = () => {
                 placeholder="Somente números"
               />
             </div>
+
             <div className="input-group">
               <label>Rua:</label>
               <input
@@ -209,6 +211,7 @@ const Cadastro = () => {
               />
             </div>
           </div>
+
           <div className="input-login">
             <div className="input-group">
               <label>Bairro:</label>
@@ -221,6 +224,7 @@ const Cadastro = () => {
                 // disabled={bairro == ''}
               />
             </div>
+
             <div className="input-group">
               <label>Cidade:</label>
               <input
@@ -233,6 +237,7 @@ const Cadastro = () => {
               />
             </div>
           </div>
+
           <div className="input-login">
             <div className="input-group">
               <label>RG:</label>
@@ -245,6 +250,7 @@ const Cadastro = () => {
                 placeholder="Apenas números"
               />
             </div>
+
             <div className="input-group">
               <label>Telefone:</label>
               <input
@@ -257,6 +263,7 @@ const Cadastro = () => {
               />
             </div>
           </div>
+
           <button type="submit" disabled={carregando} className="btn-cadastro">
             {carregando ? "Cadastrando..." : "Cadastrar"}
           </button>
