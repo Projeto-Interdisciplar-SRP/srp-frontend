@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/EditarPerfil.css';
 import logoSol from "../img/Sun (1).png";
-import { useAuth } from "../componentes/Auths/Auth"; // Importando o hook useAuth
+import { useAuth } from "../componentes/Auth"; // Importando o hook useAuth
 import env from '/env.js';
 
 const EditarUsuario = () => {
@@ -29,7 +29,7 @@ const EditarUsuario = () => {
     if (userId) {
       const carregarDadosUsuario = async () => {
         try {
-          const resposta = await axios.get(`${env.url.local}/user/${userId}`);
+          const resposta = await axios.get(`${env.url.local}/user/edit/${userId}`);
           const usuario = resposta.data;
           setNome(usuario.nome);
           setEmail(usuario.email);
@@ -89,6 +89,7 @@ const EditarUsuario = () => {
     }
 
     const dadosAtualizados = {
+      id: userId,
       nome,
       email,
       senha,
@@ -105,7 +106,7 @@ const EditarUsuario = () => {
     setMensagem('');
 
     try {
-      const resposta = await axios.put(`${env.url.local}/user/edit/${userId}`, dadosAtualizados, {
+      const resposta = await axios.put(`${env.url.local}/user/edit`, dadosAtualizados, {
         headers: {
             'Content-Type': 'application/json',
           },
@@ -144,10 +145,16 @@ const EditarUsuario = () => {
           <img src={logoSol} alt="Profile" />
         </div>
         <h2>Editar Usuário</h2>
+        <Link to="/perfil">
+            <button>
+                Voltar para o Perfil
+            </button>
+        </Link>
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="input-group">
+      <div className="input-login">
+      <div className="input-group">
           <label>Nome:</label>
           <input
             type="text"
@@ -165,6 +172,8 @@ const EditarUsuario = () => {
             required
           />
         </div>
+      </div>
+        <div className="input-login">
         <div className="input-group">
           <label>Senha:</label>
           <input
@@ -174,6 +183,18 @@ const EditarUsuario = () => {
             required
           />
         </div>
+        <div className="input-group">
+          <label>CPF:</label>
+          <input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            required
+            maxLength="11"
+          />
+        </div>
+        </div>
+        
         <div className="input-group">
           <label>CEP:</label>
           <input
@@ -212,16 +233,7 @@ const EditarUsuario = () => {
             required
           />
         </div>
-        <div className="input-group">
-          <label>CPF:</label>
-          <input
-            type="text"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-            required
-            maxLength="11"
-          />
-        </div>
+       
         <div className="input-group">
           <label>RG:</label>
           <input

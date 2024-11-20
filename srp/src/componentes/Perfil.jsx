@@ -8,7 +8,7 @@
   import logoSrp from '../img/SRP Viagens.png';
   import logoSol from '../img/Sun.png';
   import { useNavigate, Link } from 'react-router-dom'; 
-  import { useAuth } from "../componentes/Auths/Auth";
+  import { useAuth } from "../componentes/Auth";
 
   const Profile = () => {
 

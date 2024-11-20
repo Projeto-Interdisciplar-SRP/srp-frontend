@@ -78,9 +78,6 @@ export default function Header({ which }) {
             <Link to="/perfil">
             <button type="button">Perfil</button>
             </Link>
-            
-            
-            
           </div>
         </header>
       );

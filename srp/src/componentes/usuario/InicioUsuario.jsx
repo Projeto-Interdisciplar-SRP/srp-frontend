@@ -3,7 +3,6 @@ import Header from "../utilizavel/Header";
 import Footer from "../utilizavel/Footer";
 
 import "../../styles/inicio_usuario.css";
-// import api from '../serve/api';
 import logoSrp from "../../img/SRP Viagens.png";
 import logoSol from "../../img/Sun.png";
 import banner from "../../img/banner-paroquia.png";
@@ -20,7 +19,6 @@ import valor3 from "../../img/Shield.png";
 
 
 export default function InicioUsuario() {
-
     const [current, setCurrent] = useState(1); // Começa na imagem do meio (índice 1)
     const handleNext = () => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -28,11 +26,13 @@ export default function InicioUsuario() {
     const handlePrev = () => {
       setCurrent((prev) => (prev - 1 + images.length) % images.length);
     };
-  return (
-    <div className="container">
-      <Header which="usuario" page="inicio" />
+    return(
 
-      <div className="banner">
+        <div className="container">
+
+            <Header which="usuario" page="inicio" />
+
+            <div className="banner">
         <img src={banner} alt="Profile"></img>
         <div className="dados-viagem">
           <h1>Sua Viagem mais prática e segura</h1>
@@ -108,6 +108,9 @@ export default function InicioUsuario() {
         </div>
       </div>
       <Footer />
-    </div>
-  );
+
+        </div>
+
+    )
+
 }
