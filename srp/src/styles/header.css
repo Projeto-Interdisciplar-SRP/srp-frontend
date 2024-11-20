@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
 
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.entrar-perfil{
+  position: relative;
+  left: 30%;
+}
+
 .navBarWrapper{
   margin: 0;
   padding: 0;
@@ -62,7 +76,7 @@
   width:0;
   transition: width .5s;
   height:3px;
-  background: #000;
+  /* background: #000; */
 }
 
 .link:hover::after{

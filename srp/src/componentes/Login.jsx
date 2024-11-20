@@ -31,37 +31,39 @@ const Login = () => {
   
     try {
 
-        const fetched = await fetch(env.url.local+'/auth', {
+        const fetched = await fetch(env.url.local +'/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
         body: JSON.stringify({ email, senha }),
       });
 
       const response = await fetched.json();
 
       // Verifica se o email e a senha são do admin
-    if (email === env.credentials.master.email && senha === env.credentials.master.password) {
-      setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
+      if (email === env.credentials.master.email && senha === env.credentials.master.password) {
+        setUsuario({ email }); // Armazena os dados do usuário (você pode armazenar mais dados, se necessário)
 
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Olá secretária, vamos te redirecionar para a tela.',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      });
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Olá secretária, vamos te redirecionar para a tela.',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
 
-      localStorage.setItem('usuario', JSON.stringify(
-        {
-          email: "adm123@gmail.com",
-          secretaria: true
-        }
-      ))
+        localStorage.setItem('usuario', JSON.stringify(
+          {
+            id: 'secretaria',
+            email: "adm123@gmail.com",
+            secretaria: true
+          }
+        ))
 
-      navigate('/secretaria'); // Redireciona para a página da secretaria
-      return;
-    }
+        navigate('/secretaria'); // Redireciona para a página da secretaria
+        return;
+      }
 
       // Verifica se a resposta não foi bem sucedida
       if (response.status == false) {
@@ -77,6 +79,10 @@ const Login = () => {
 
       }
 
+      const dadosUsuario = await response.json(); // Exemplo: { id: '123', nome: 'Isaias', email: 'isaiaslindo@gmail.com' }
+      localStorage.setItem("usuario", JSON.stringify(dadosUsuario)); // Armazena os dados no localStorage
+      return dadosUsuario;
+      
     } catch (error) {
       console.error('Erro:', error);
       setMensagem('Login falhou. Tente novamente.'); // Alerta para falha no login
@@ -92,7 +98,8 @@ const Login = () => {
 
   // Retorno do JSX
   return (
-    <div className="auth-container">
+    <div className="login-container">
+      <div className="login">
         <div className="top">
           <div className="logo-form">
             <img src={logoSol} alt="Logo" />
@@ -131,6 +138,7 @@ const Login = () => {
           </button>
           </div>
         </form>
+        </div>
     </div>
   );
 };

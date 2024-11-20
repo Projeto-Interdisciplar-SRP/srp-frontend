@@ -1,3 +1,39 @@
+.cadastro-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding-top: 5dvh;
+}
+
+.cadastro{
+  width: 70%;
+  /* background-color: #0c86c4; */
+  background-color: #fff;
+}
+
+.top-cadastro{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.input-login {
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .header-cadastro{
   position: fixed;
   top: 0;
@@ -19,7 +55,9 @@ header .ir-login{
 header .ir-login button{
   width: 40%;
 }
-
+.input-group{
+  /* width: 100%; */
+}
 h2 {
   text-align: center;
   color: #0E9FE7;
@@ -28,6 +66,7 @@ h2 {
 form {
   display: flex;
   flex-direction: column;
+  
 }
 
 label {
