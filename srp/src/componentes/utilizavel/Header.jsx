@@ -76,7 +76,7 @@ export default function Header({ which }) {
           </ul>
           <div className="entrar-perfil">
             <Link to="/perfil">
-            <button type="button">Perfil</button>
+              <button type="button">Perfil</button>
             </Link>
           </div>
         </header>
@@ -121,35 +121,18 @@ export default function Header({ which }) {
 
     case "secretaria":
       return (
-        <nav className="navBarWrapper" id="navBarWrapper">
-          <div className="logoWrapper">
-            <div className="logo">SRP</div>
+        <header>
+          <div className="logo">
+            <img src={logoSol} alt="Profile"></img>
+            <img src={logoSrp} alt="Profile"></img>
           </div>
-          <div className="menuIconWrapper" id="menuIconWrapper"></div>
-          <ul className="navLink" id="navBar">
-            <li className="linkSelect">
-              <a href="/secretaria/cadastro/coordenador" className="link">
-                {" "}
-                Cadastrar Coordenadores
-              </a>
-            </li>
-            <li className="linkSelect">
-              <a href="/secretaria/cadastro/onibus" className="link">
-                Cadastrar Onibus
-              </a>
-            </li>
-            <li className="linkSelect">
-              <a href="/secretaria/cadastro/coordenador" className="link">
-                Cadastrar Viajem
-              </a>
-            </li>
-            <li className="linkSelect">
-              <a onClick={logOut} className="link">
-                Sair
-              </a>
-            </li>
-          </ul>
-        </nav>
+          
+          <div className="entrar-perfil">
+            <Link to="/">
+              <button type="button">Sair</button>
+            </Link>
+          </div>
+        </header>
       );
 
     default:
