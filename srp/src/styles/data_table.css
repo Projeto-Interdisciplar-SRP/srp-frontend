@@ -1,6 +1,10 @@
 /* Estilos para o contêiner da tabela */
 .table-container {
     margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 /* Estilos para a tabela */
@@ -44,4 +48,15 @@
 /* Estilos para o cabeçalho da página */
 .header {
     margin-bottom: 30px;
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.pagination button{
+    width: 100px;
 }

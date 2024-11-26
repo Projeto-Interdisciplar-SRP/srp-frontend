@@ -59,7 +59,7 @@ export default function Header({ which }) {
           </div>
           <ul>
             <li>
-              <a href="/">Inicio</a>
+              <a href="/inicio">Inicio</a>
             </li>
             <li>
               <a href="">Sobre</a>

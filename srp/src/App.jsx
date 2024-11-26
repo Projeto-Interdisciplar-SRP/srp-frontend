@@ -26,6 +26,7 @@ import Welcome from "./componentes/Welcome";
 //Telas Secretaria
 import Secretaria from './componentes/secretaria/InicioSecretaria';
 
+import PessoaCoordenador from './componentes/coordenador/visao/PessoaCoordenador.jsx';
 import CadastroOnibus from './componentes/onibus/CadastroOnibus';
 import ListarOnibus from './componentes/onibus/CadastroOnibus';
 import EditarOnibus from './componentes/onibus/EditarOnibus';
@@ -39,6 +40,8 @@ import Detalhesviagem from './componentes/viagem/DetalhesViagem';
 import Pagamento from './componentes/Pagamento.jsx'
 
 import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
+
+
 
 const App = () => {
 
@@ -64,11 +67,12 @@ const App = () => {
           <Route path="/sobre" element={<Sobre />} />
 
           <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
+          <Route path='/adm/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
           
           <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />
-          <Route path="/secretaria/listar/coordenador" element={ <ListarCoodenador /> } />
+          <Route path="/secretaria/listar/coordenador" element={ <PessoaCoordenador /> } />
           <Route path="/secretaria/listar/coordenador/detalhes" element={ <DetalhesCoordenador /> } />
           <Route path="/secretaria/listar/coordenador/editar" element={ <EditarCoordenador /> } />
 

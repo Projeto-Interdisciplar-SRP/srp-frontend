@@ -6,7 +6,7 @@ export default function InicioSecretaria() {
     const navigate = useNavigate();
 
     const CadastroOnibus = () => {
-        navigate('/secretaria/listar/onibus')
+        navigate('/adm/onibus')
     }
     const CadastroIngressos = () => {
         navigate('/secretaria/listar/ingressos')

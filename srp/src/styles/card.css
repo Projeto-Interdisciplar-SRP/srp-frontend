@@ -6,6 +6,7 @@
     align-items:center;
     font-family:"poppins",sanserif;
     font-weight:500;
+    
   }
   .box{
     display:flex;
@@ -16,6 +17,7 @@
     box-shadow: 0px 4px 4px #999;
     margin:5px;
     padding:10px;
+   
   }
   .top{
     display:flex;
@@ -24,8 +26,11 @@
   }
   .Bottom{
     display:flex;
+    align-items: center;
+    justify-content: center;
     flex-direction:column;
     padding:15px;
+    width: 100%;
   }
   h1 {
       font-size: 2rem;    
