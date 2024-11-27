@@ -1,9 +1,11 @@
 
 .welcome-container {
   padding: 20px;
-  text-align: center;
-  margin-top: 200px;
+  display: flex;
+  align-items: center;
   justify-items: center;
+  flex-direction: column;
+  margin-top: 15dvh;
 }
 
 .div-buttons {
@@ -24,6 +26,12 @@
   padding: 30px;
 }
 
+.opcoes{
+  display: flex;
+  align-items: center;
+  justify-content: space-beteewen;
+}
+
 .welcome-button {
   padding: 10px 20px;
   margin: 0 10px;
@@ -34,7 +42,15 @@
 }
 
 .welcome-button.cadastrar {
+  background-color: #fff;
+  border: black solid 1px;
+  color: black;
+}
+
+.welcome-button.cadastrar:hover{
   background-color: #0e9fe7;
+  color: #fff;
+  border: none;
 }
 
 .welcome-button.login {

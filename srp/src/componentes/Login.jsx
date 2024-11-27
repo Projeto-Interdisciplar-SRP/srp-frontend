@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import '../styles/Login.css';     
+import '../styles/Login.css';
 import logoSol from "../img/Sun (1).png";
 import env from '/env.js';
 
@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     setMensagem(''); // Limpa mensagens anteriores
     setCarregando(true); // Inicia o estado de carregamento
-  
+
     // Verificação de campos obrigatórios
     if (!email || !senha) {
       setMensagem('Por favor, preencha todos os campos.');
@@ -28,15 +28,14 @@ const Login = () => {
       return;
     }
 
-  
+
     try {
 
-        const fetched = await fetch(env.url.local +'/auth', {
+      const fetched = await fetch(env.url.local + '/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        mode: 'cors',
         body: JSON.stringify({ email, senha }),
       });
 
@@ -55,7 +54,6 @@ const Login = () => {
 
         localStorage.setItem('usuario', JSON.stringify(
           {
-            id: 'secretaria',
             email: "adm123@gmail.com",
             secretaria: true
           }
@@ -67,22 +65,18 @@ const Login = () => {
 
       // Verifica se a resposta não foi bem sucedida
       if (response.status == false) {
-        
+
         setMensagem(response.message || 'Erro ao fazer login'); // Mostra mensagem de erro
         setCarregando(false);
         return;
 
-      }else{
+      } else {
 
         localStorage.setItem('usuario', JSON.stringify(response.data)) // Armazena os dados do usuário no localstorage
         navigate('/inicio'); // Redireciona para o perfil após o login
 
       }
 
-      const dadosUsuario = await response.json(); // Exemplo: { id: '123', nome: 'Isaias', email: 'isaiaslindo@gmail.com' }
-      localStorage.setItem("usuario", JSON.stringify(dadosUsuario)); // Armazena os dados no localStorage
-      return dadosUsuario;
-      
     } catch (error) {
       console.error('Erro:', error);
       setMensagem('Login falhou. Tente novamente.'); // Alerta para falha no login
@@ -90,7 +84,7 @@ const Login = () => {
     }
 
   };
-  
+
   // Função para navegar até a página de cadastro
   const handleCadastroRedirect = () => {
     navigate('/cadastro');
@@ -99,46 +93,44 @@ const Login = () => {
   // Retorno do JSX
   return (
     <div className="login-container">
-      <div className="login">
-        <div className="top">
-          <div className="logo-form">
-            <img src={logoSol} alt="Logo" />
-          </div>
-          <h2>Login</h2>
+      <div className="top">
+        <div className="logo-form">
+          <img src={logoSol} alt="Logo" />
         </div>
-        {mensagem && <p className="mensagem">{mensagem}</p>}
-        <form onSubmit={handleSubmit} className='form-login'>
-          <div className="input-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="usuario@exemplo.com"
-            />
-          </div>
-          <div className="input-group">
-            <label>Senha:</label>
-            <input
-              type="password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
-              placeholder="Sua senha"
-            />
-          </div>
-          <button type="submit" disabled={carregando}>
-            {carregando ? 'Entrando...' : 'Login'}
-          </button>
-            <div className="cadastro">
+        <h2>Login</h2>
+      </div>
+      {mensagem && <p className="mensagem">{mensagem}</p>}
+      <form onSubmit={handleSubmit} className='form-login'>
+        <div className="input-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="usuario@exemplo.com"
+          />
+        </div>
+        <div className="input-group">
+          <label>Senha:</label>
+          <input
+            type="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            required
+            placeholder="Sua senha"
+          />
+        </div>
+        <button type="submit" disabled={carregando}>
+          {carregando ? 'Entrando...' : 'Login'}
+        </button>
+        <div className="cadastro">
           <p>Não possui conta? Clique abaixo </p>
           <button type="button" onClick={handleCadastroRedirect} className="cadastro-btn">
             Ir para Cadastro
           </button>
-          </div>
-        </form>
         </div>
+      </form>
     </div>
   );
 };

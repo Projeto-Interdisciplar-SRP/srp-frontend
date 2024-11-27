@@ -34,6 +34,8 @@ header .logo{
   justify-content: space-between;
   width: 90%;
   height: 10dvh;
+  position: relative;
+  bottom: 10dvh;
 }
 
 .profile-img-info{
@@ -99,6 +101,8 @@ button.back-btn:hover{
 .tickets-section {
   width: 100%;
   margin: 0;
+  position: relative;
+  bottom: 17dvh;
 }
 
 .tickets-section h3{

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';  // Importando o hook useNavigate
-import '../../styles/Cadastro.css';    
+import '../../styles/Cadastro.css';
 import logoSol from "../../img/Sun (1).png";
 import env from '/env.js';
 
@@ -21,10 +21,33 @@ const CadastroCoordenador = () => {
   const [paroquia, setParoquia] = useState('none');
   const [mensagem, setMensagem] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const [useLocal, setLocal] = useState([{}]);
+  const [paroquias, setParoquias] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  async function fetchAllParoquias() {
+    const response = await fetch(env.url.local + '/local', {
+        method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'true',
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json();
+
+    if (Array.isArray(data.data)) {
+        setParoquias(data.data);
+    } else {
+        console.error("A resposta não é um array válido", data.data);
+    }
+    setLoading(false);
+}
+
+  useEffect(() => {
+    fetchAllParoquias();
+  }, []);
+
 
   // Função para buscar endereço pelo CEP
   const buscarEndereco = async (cep) => {
@@ -86,14 +109,14 @@ const CadastroCoordenador = () => {
       adm: 1,
       id_paroquia: paroquia
     };
-    
+
     setCarregando(true);
     setMensagem('');
 
     try {
 
       const resposta = await axios.post(env.url.local + '/user/register', dadosUsuario);
-      
+
       if (resposta.data.status == true) {
 
         Swal.fire({
@@ -104,14 +127,14 @@ const CadastroCoordenador = () => {
         }).then((result) => {
 
           if (result.isConfirmed) {
-            
+
             navigate('/login', { state: { recemRegistrado: true } })
 
           }
 
-        }); 
+        });
 
-      }else{
+      } else {
 
         setMensagem(resposta.data.message);
 
@@ -154,7 +177,7 @@ const CadastroCoordenador = () => {
   useEffect(() => {
 
     function verifyIfIsCoordinator() {
-      
+
       if (!location.state || location.state.pass == null || location.state.pass == undefined) {
         return navigate('/confirmar/cadastro/coordenador');
       } else {
@@ -173,19 +196,20 @@ const CadastroCoordenador = () => {
 
   return (
 
-    <div className="auth-container">
+    <div className="cadastro-container">
 
-        <div className="top">
-          <div className="logo-form">
-            <img src={logoSol} alt="Profile"></img>
-          </div>
-          <h2>Cadastro Coordenador</h2>
+      <div className="top">
+        <div className="logo-form">
+          <img src={logoSol} alt="Profile"></img>
         </div>
+        <h2>Cadastro Coordenador</h2>
+      </div>
 
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <div className="input">
           <div className="input-group">
             <label>Nome:</label>
-            <input 
+            <input
               type="text"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
@@ -202,7 +226,9 @@ const CadastroCoordenador = () => {
               required
             />
           </div>
+        </div>
 
+        <div className="input">
           <div className="input-group">
             <label>Senha:</label>
             <input
@@ -224,7 +250,9 @@ const CadastroCoordenador = () => {
               placeholder="Somente números"
             />
           </div>
+        </div>
 
+        <div className="input">
           <div className="input-group">
             <label>Rua:</label>
             <input
@@ -248,7 +276,9 @@ const CadastroCoordenador = () => {
               disabled={bairro == ''}
             />
           </div>
+        </div>
 
+        <div className="input">
           <div className="input-group">
             <label>Cidade:</label>
             <input
@@ -272,7 +302,9 @@ const CadastroCoordenador = () => {
               placeholder="Apenas números"
             />
           </div>
+        </div>
 
+        <div className="input">
           <div className="input-group">
             <label>RG:</label>
             <input
@@ -296,28 +328,39 @@ const CadastroCoordenador = () => {
               placeholder="Apenas números"
             />
           </div>
+        </div>
 
-          <div className="input-group">
-              <label>Paróquia:</label>
-              <select name="selectParoquia" id="selectParoquia" value={paroquia} onChange={(e) => setParoquia(e.target.value)}>
-                  <option value="none">Selecione..</option>
-                  {
-                    useLocal.map((element, index) => {
-                      return <option key={index} value={element.id}>{element.nome}</option>
-                    })
-                  }
-              </select>
-          </div>
+        <div className="input">
+        <div className="input-group">
+          <label>Paróquia:</label>
+          <select
+            name="selectParoquia"
+            id="selectParoquia"
+            value={paroquia}
+            onChange={(e) => setParoquia(e.target.value)}
+          >
+            <option value="none">Selecione...</option>
+            {paroquias.length > 0 ? (
+              paroquias.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.nome}
+                </option>
+              ))
+            ) : (
+              <option value="none" disabled>Carregando paróquias...</option>
+            )}
+          </select>
+        </div>
 
-          <button type="submit" disabled={carregando} className='btn-cadastro'>
-            {carregando ? 'Cadastrando...' : 'Cadastrar'}
-          </button>
+        <button type="submit" disabled={carregando} className='button-cadastro'>
+          {carregando ? 'Cadastrando...' : 'Cadastrar'}
+        </button>
+        </div>
+        {mensagem && <p className="mensagem">{mensagem}</p>}
 
-          {mensagem && <p className="mensagem">{mensagem}</p>}
+      </form>
 
-        </form>
-
-      </div>
+    </div>
 
   );
 };

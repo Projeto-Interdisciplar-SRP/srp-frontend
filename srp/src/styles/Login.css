@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10dvh;
+  flex-direction: column;
+  margin-top: 10dvh;
 }
 
 .cadastro-btn {
@@ -15,7 +16,10 @@
   width: 100%;
   font-size: 16px;
 }
-
+.cadastro{
+  position: relative;
+  /* left: 60px; */
+}
 .cadastro-btn:hover {
   background-color: #007BFF;
   color: #ffffff;

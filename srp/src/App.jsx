@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './componentes/Auths/Auth';
+import { AuthProvider } from './componentes/Auth';
 
 
 // Telas do Usuario
@@ -26,6 +26,7 @@ import Welcome from "./componentes/Welcome";
 //Telas Secretaria
 import Secretaria from './componentes/secretaria/InicioSecretaria';
 
+import PessoaCoordenador from './componentes/coordenador/visao/PessoaCoordenador.jsx';
 import CadastroOnibus from './componentes/onibus/CadastroOnibus';
 import ListarOnibus from './componentes/onibus/CadastroOnibus';
 import EditarOnibus from './componentes/onibus/EditarOnibus';
@@ -38,9 +39,13 @@ import Detalhesviagem from './componentes/viagem/DetalhesViagem';
 
 import Pagamento from './componentes/Pagamento.jsx'
 
+import Paróquia from './componentes/paroquias/Paróquias';
+
 import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
 import OnibusSecretaria from './componentes/secretaria/visao/OnibusSecretaria.jsx';
 import CoordenadorSecretaria from './componentes/secretaria/visao/CoodenadorSecretaria.jsx';
+
+
 
 const App = () => {
 
@@ -66,6 +71,7 @@ const App = () => {
           <Route path="/sobre" element={<Sobre />} />
 
           <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
+          <Route path='/adm/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
 
           <Route path='/secretaria/onibus' element={<AuthProvider> <OnibusSecretaria/> </AuthProvider>}/>
@@ -73,7 +79,7 @@ const App = () => {
           
           <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />
-          <Route path="/secretaria/listar/coordenador" element={ <ListarCoodenador /> } />
+          <Route path="/secretaria/listar/coordenador" element={ <PessoaCoordenador /> } />
           <Route path="/secretaria/listar/coordenador/detalhes" element={ <DetalhesCoordenador /> } />
           <Route path="/secretaria/listar/coordenador/editar" element={ <EditarCoordenador /> } />
 
@@ -92,6 +98,8 @@ const App = () => {
           <Route path="/pagamento" element={ <Pagamento /> } />
           <Route path="/cancelamento" element={ <Cancelamento /> } />
           <Route path="/relatorio" element={ <RelatórioPagamento /> } />
+
+          <Route path="/paroquias" element={ <Paróquia /> } />
           
       </Routes>
     </Router>

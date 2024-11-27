@@ -8,7 +8,7 @@
   import logoSrp from '../img/SRP Viagens.png';
   import logoSol from '../img/Sun.png';
   import { useNavigate, Link } from 'react-router-dom'; 
-  import { useAuth } from "../componentes/Auths/Auth";
+  import { useAuth } from "../componentes/Auth";
 
   const Profile = () => {
 
@@ -41,7 +41,29 @@
 
     return (
       <div className="container">
-        <Header which={userRole} />
+         <header>
+          <div className="logo">
+            <img src={logoSol} alt="Profile"></img>
+            <img src={logoSrp} alt="Profile"></img>
+          </div>
+          <ul>
+            <li>
+              <a href="/inicio">Inicio</a>
+            </li>
+            <li>
+              <a href="">Sobre</a>
+            </li>
+            <li>
+              <a href="">Viagem</a>
+            </li>
+            <li>
+              <a href="">Cancelamento</a>
+            </li>
+            <li>
+              <a href="">Ajuda</a>
+            </li>
+          </ul>
+        </header>
         <div className="profile">
           <div className="profile-img-info">
             <div className="img-profile">
