@@ -261,14 +261,17 @@ export default function PessoaCoordenador() {
                         { header: "Cidade", accessor: "cidade" }
                     ]
                 }
+
                 eventEditButton={(item) => {
                     setModalEdit(true);
                     setUseSingleUser(item);
                 }}
                 eventDelButton={(item) => {
                     setModalDelete(true);
+                  
                     setUseSingleUser(item);
                 }}
+                
                 searchField={'cpf'}
                 itemsPerPage={5}
             />

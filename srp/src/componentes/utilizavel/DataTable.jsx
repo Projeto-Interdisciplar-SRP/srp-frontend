@@ -9,17 +9,18 @@ function DataTable({ data, columns, eventEditButton, eventDelButton, searchField
     const [filteredData, setFilteredData] = useState(data);
 
     useEffect(() => {
-        // Atualiza os dados filtrados sempre que o searchTerm mudar
-        if (searchTerm) {
+        const timeoutId = setTimeout(() => {
+            if (searchTerm) {
+                const filtered = data.filter(item => 
+                    item[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                setFilteredData(filtered);
+            } else {
+                setFilteredData(data);
+            }
+        }, 300); // Delay de 300ms para evitar chamadas excessivas
 
-            const filtered = data.filter(item => 
-                item[searchField]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            
-            setFilteredData(filtered);
-        } else {
-            setFilteredData(data);
-        }
+        return () => clearTimeout(timeoutId); // Limpa o timeout ao mudar o searchTerm
     }, [searchTerm, data, searchField]);
 
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -27,7 +28,7 @@ function DataTable({ data, columns, eventEditButton, eventDelButton, searchField
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-        setCurrentPage(1); // Reset to the first page when the search term changes
+        setCurrentPage(1); // Resetar para a primeira página quando o termo de pesquisa mudar
     };
 
     const handlePageChange = (pageNumber) => {
@@ -36,6 +37,7 @@ function DataTable({ data, columns, eventEditButton, eventDelButton, searchField
 
     return (
         <div className="table-container">
+
             <input 
                 type="text" 
                 className="search-input" 
@@ -43,6 +45,7 @@ function DataTable({ data, columns, eventEditButton, eventDelButton, searchField
                 value={searchTerm} 
                 onChange={handleSearchChange} 
             />
+            
             <div className="scrollable-table" style={{ height: "400px", overflowY: "auto" }}>
                 <table className="data-table">
                     <thead>

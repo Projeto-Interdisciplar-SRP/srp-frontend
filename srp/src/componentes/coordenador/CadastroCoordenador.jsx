@@ -155,6 +155,25 @@ const CadastroCoordenador = () => {
     }
   };
 
+  const chaseLocals = async () => {
+
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers:{
+        'ngrok-skip-browser-warning': true
+      }
+    };
+    
+    fetch(env.url.local + "/local/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => 
+        setLocal(result.data)
+      )
+      .catch((error) => console.error(error));
+
+  }
+
   useEffect(() => {
 
     function verifyIfIsCoordinator() {
@@ -168,6 +187,8 @@ const CadastroCoordenador = () => {
       }
 
     }
+
+    chaseLocals()
 
     verifyIfIsCoordinator();
 

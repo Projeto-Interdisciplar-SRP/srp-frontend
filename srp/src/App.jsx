@@ -42,6 +42,8 @@ import Pagamento from './componentes/Pagamento.jsx'
 import Paróquia from './componentes/paroquias/Paróquias';
 
 import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
+import OnibusSecretaria from './componentes/secretaria/visao/OnibusSecretaria.jsx';
+import CoordenadorSecretaria from './componentes/secretaria/visao/CoodenadorSecretaria.jsx';
 
 
 
@@ -71,6 +73,9 @@ const App = () => {
           <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/adm/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
+
+          <Route path='/secretaria/onibus' element={<AuthProvider> <OnibusSecretaria/> </AuthProvider>}/>
+          <Route path='/secretaria/coordenador' element={<AuthProvider> <CoordenadorSecretaria/> </AuthProvider>}/>
           
           <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />

@@ -50,6 +50,7 @@ export default function Header({ which }) {
   );
 
   switch (which) {
+
     case "usuario":
       return (
         <header>
@@ -126,7 +127,6 @@ export default function Header({ which }) {
             <img src={logoSol} alt="Profile"></img>
             <img src={logoSrp} alt="Profile"></img>
           </div>
-          
           <div className="entrar-perfil">
             <Link to="/">
               <button type="button">Sair</button>
