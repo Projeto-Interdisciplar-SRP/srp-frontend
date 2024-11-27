@@ -39,6 +39,8 @@ import Detalhesviagem from './componentes/viagem/DetalhesViagem';
 
 import Pagamento from './componentes/Pagamento.jsx'
 
+import Paróquia from './componentes/paroquias/Paróquias';
+
 import RelatórioPagamento from './componentes/secretaria/RelatórioPagamento.jsx'
 
 
@@ -91,6 +93,8 @@ const App = () => {
           <Route path="/pagamento" element={ <Pagamento /> } />
           <Route path="/cancelamento" element={ <Cancelamento /> } />
           <Route path="/relatorio" element={ <RelatórioPagamento /> } />
+
+          <Route path="/paroquias" element={ <Paróquia /> } />
           
       </Routes>
     </Router>

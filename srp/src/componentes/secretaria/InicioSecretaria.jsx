@@ -14,6 +14,9 @@ export default function InicioSecretaria() {
     const CadastroCoordenadores = () => {
         navigate('/secretaria/listar/coordenador')
     }
+    const paroquias = () => {
+        navigate('/paroquias')
+    }
     
     return (
         <div className="container-secretaria">
@@ -49,7 +52,7 @@ export default function InicioSecretaria() {
           <div className="cards">
             <h3>Paróquias</h3>
             <p>Aqui a Admistração poderá ver, todos os pagamentos dos ingressos</p>
-            <button onClick={CadastroIngressos}>Paróquias</button>
+            <button onClick={paroquias}>Paróquias</button>
           </div>
           
         </div>
