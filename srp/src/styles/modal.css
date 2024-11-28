@@ -11,28 +11,49 @@
     position: fixed;
     
   }
+  select {
+    padding: 10px 15px; 
+    border: 1px solid #aaa; 
+    border-radius: 8px;
+    outline: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer; 
+  }
   
+  .modal-content button{
+    margin-top: 20px;
+  }
+
+  select:focus {
+    border-color: #007BFF;
+    background-color: #fff;
+  }
   form{
     gap:0 !important;
 
   }
-
+  .modal-content input{
+    width: 98%;
+  }
   .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 80%;
-    height: 75dvh;
+    height: auto;
   }
 
   .input{
-    width: 100%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 50px;
   }
 
   .input-group{
-    width: 45%;
+    width: 50%;
   }

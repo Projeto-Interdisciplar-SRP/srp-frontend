@@ -42,17 +42,16 @@ h3 {
 }
 
 .origem {
-  width: 200px;
-  height: 11dvh;
+  width: 600px;
+  height: auto;
   border-radius: 20px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  margin: 20px;
   border: #666666 solid 2px;
-  padding-left: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   line-height: 0;
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
 }
@@ -64,6 +63,7 @@ h3 {
   justify-content: space-around;
   flex-direction: column;
   height: 30dvh;
+  margin-top: 30px;
 }
 
 .valores-viagens h1 {
@@ -79,6 +79,7 @@ h3 {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 .carrosel h1 {

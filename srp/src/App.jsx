@@ -79,7 +79,8 @@ const App = () => {
           
           <Route path="/secretaria/cadastro/coordenador" element={<CadastroCoordenador />} />
           <Route path="/confirmar/cadastro/coordenador" element={<ConfirmarCoordenador />} />
-          <Route path="/secretaria/listar/coordenador" element={ <PessoaCoordenador /> } />
+          <Route path="/secretaria/listar/usuarios" element={ <PessoaCoordenador /> } />
+          <Route path="/secretaria/listar/coordenadores" element={ <ListarCoodenador /> } />
           <Route path="/secretaria/listar/coordenador/detalhes" element={ <DetalhesCoordenador /> } />
           <Route path="/secretaria/listar/coordenador/editar" element={ <EditarCoordenador /> } />
 

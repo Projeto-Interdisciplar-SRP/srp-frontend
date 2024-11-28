@@ -10,9 +10,10 @@ export default function ReservaCoordenador() {
     const [reservations, setReservations] = useState([]); // all reservations
     const [singleReservation, setSingleReservation] = useState({}); // selected reservation data
     const [singleUpdatedReservation, setSingleUpdatedReservation] = useState({}); // selected reservation data
+    const [singleDetailsReservation, setSingleDetailsReservation] = useState({}); // selected reservation data
 
     const [loading, setLoading] = useState(false);
-    
+
     const [modalEdit, setModalEdit] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
     const [modalNewReservation, setModalNewReservation] = useState(false);
@@ -21,7 +22,7 @@ export default function ReservaCoordenador() {
     const [users, setUsers] = useState([]);
     const [parishes, setParishes] = useState([]);
     const [buses, setBuses] = useState([]);
-    
+
     // Função genérica para buscar dados
     const fetchSelectData = async (url, setData) => {
         try {
@@ -55,11 +56,11 @@ export default function ReservaCoordenador() {
         } else {
             console.error("Response is not a valid array", data.data);
         }
-        
+
     }
 
     // handle everything that has to be done when page is opne
-    async function handleBeginPage() {     
+    async function handleBeginPage() {
 
         setLoading(true);
 
@@ -168,248 +169,252 @@ export default function ReservaCoordenador() {
             <Modal isOpen={modalEdit} closeModal={() => setModalEdit(false)}>
                 <form onSubmit={handleUpdateReservation}>
                     <h2>Editar Reserva</h2>
-                    <div className="input-group">
-                        
-                        {/* Usuário */}
-                        <label>Usuário:</label>
-                        <select
-                            name="userId"
-                            required
-                            value={singleUpdatedReservation.userId || ''}
-                            onChange={(e) => {
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    userId: e.target.value,
-                                }));
-                            }}
-                        >
-                            <option value="">Selecione...</option>
-                            {users.map((user) => (
-                                <option key={user.id} value={user.id}>
-                                    {user.nome}
-                                </option>
-                            ))}
-                        </select>
+                    <div className="input">
+                        <div className="input-group">
 
-                        {/* Paróquia */}
-                        <label>Paróquia:</label>
-                        <select
-                            name="localId"
-                            required
-                            value={singleUpdatedReservation.localId || ''}
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    localId: e.target.value,
-                                }))
-                            }
-                        >
-                            <option value="">Selecione...</option>
-                            {parishes.map((parish) => (
-                                <option key={parish.id} value={parish.id}>
-                                    {parish.nome}
-                                </option>
-                            ))}
-                        </select>
-
-                        {/* Ônibus */}
-                        <label>Ônibus:</label>
-                        <select
-                            name="busId"
-                            required
-                            value={singleUpdatedReservation.busId || ''}
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    busId: e.target.value,
-                                }))
-                            }
-                        >
-                            <option value="">Selecione...</option>
-                            {buses.map((bus) => (
-                                <option key={bus.id} value={bus.id}>
-                                    {bus.placa_onibus}
-                                </option>
-                            ))}
-                        </select>
-
-                        {/* Data de partida */}
-                        <label>Data de Partida:</label>
-                        <input
-                            type="datetime-local"
-                            name="dataPartida"
-                            required
-                            value={
-                                singleUpdatedReservation.dataPartida
-                                    ? new Date(singleUpdatedReservation.dataPartida).toLocaleString('sv-SE').slice(0, 16)
-                                    : ''
-                            }
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    dataPartida: new Date(e.target.value).getTime(),
-                                }))
-                            }
-                        />
-
-                        {/* Quantidade de bilhetes */}
-                        <label>Quantidade:</label>
-                        <input
-                            type="number"
-                            name="quantidade"
-                            min="1"
-                            value={singleUpdatedReservation.quantidade || ''}
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    quantidade: e.target.value,
-                                }))
-                            }
-                        />
-
-                        {/* Preço */}
-                        <label>Preço:</label>
-                        <input
-                            type="number"
-                            name="preco"
-                            step="0.01"
-                            value={singleUpdatedReservation.preco || ''}
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    preco: e.target.value,
-                                }))
-                            }
-                        />
-
-                        {/* Status */}
-                        <label>Status:</label>
-                        <select
-                            name="pagamentoStatus"
-                            value={singleUpdatedReservation.pagamentoStatus || ''}
-                            onChange={(e) =>
-                                setSingleUpdatedReservation((prev) => ({
-                                    ...prev,
-                                    pagamentoStatus: e.target.value,
-                                }))
-                            }
-                        >
-                            <option value="pendente">Pendente</option>
-                            <option value="confirmado">Confirmado</option>
-                            <option value="cancelado">Cancelado</option>
-                        </select>
-
+                            {/* Usuário */}
+                            <label>Usuário:</label>
+                            <select
+                                name="userId"
+                                required
+                                value={singleUpdatedReservation.userId || ''}
+                                onChange={(e) => {
+                                    setSingleUpdatedReservation((prev) => ({
+                                        ...prev,
+                                        userId: e.target.value,
+                                    }));
+                                }}
+                            >
+                                <option value="">Selecione...</option>
+                                {users.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.nome}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            {/* Paróquia */}
+                            <label>Paróquia:</label>
+                            <select
+                                name="localId"
+                                required
+                                value={singleUpdatedReservation.localId || ''}
+                                onChange={(e) =>
+                                    setSingleUpdatedReservation((prev) => ({
+                                        ...prev,
+                                        localId: e.target.value,
+                                    }))
+                                }
+                            >
+                                <option value="">Selecione...</option>
+                                {parishes.map((parish) => (
+                                    <option key={parish.id} value={parish.id}>
+                                        {parish.nome}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            {/* Ônibus */}
+                            <label>Ônibus:</label>
+                            <select
+                                name="busId"
+                                required
+                                value={singleUpdatedReservation.busId || ''}
+                                onChange={(e) =>
+                                    setSingleUpdatedReservation((prev) => ({
+                                        ...prev,
+                                        busId: e.target.value,
+                                    }))
+                                }
+                            >
+                                <option value="">Selecione...</option>
+                                {buses.map((bus) => (
+                                    <option key={bus.id} value={bus.id}>
+                                        {bus.placa_onibus}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+                    {/* Data de partida */}
+                    <label>Data de Partida:</label>
+                    <input
+                        type="datetime-local"
+                        name="dataPartida"
+                        required
+                        value={
+                            singleUpdatedReservation.dataPartida
+                                ? new Date(singleUpdatedReservation.dataPartida).toLocaleString('sv-SE').slice(0, 16)
+                                : ''
+                        }
+                        onChange={(e) =>
+                            setSingleUpdatedReservation((prev) => ({
+                                ...prev,
+                                dataPartida: new Date(e.target.value).getTime(),
+                            }))
+                        }
+                    />
 
-                    <button type="submit">Salvar Alterações</button>
-                    <button type="button" onClick={() => setModalEdit(false)}>
-                        Cancelar
-                    </button>
-                </form>
-            </Modal>
+                    {/* Quantidade de bilhetes */}
+                    <label>Quantidade:</label>
+                    <input
+                        type="number"
+                        name="quantidade"
+                        min="1"
+                        value={singleUpdatedReservation.quantidade || ''}
+                        onChange={(e) =>
+                            setSingleUpdatedReservation((prev) => ({
+                                ...prev,
+                                quantidade: e.target.value,
+                            }))
+                        }
+                    />
 
-            {/* Delete Modal */}
-            <Modal isOpen={modalDelete} closeModal={() => setModalDelete(false)}>
-                <div>
-                    <h2>Excluir Reserva</h2>
-                    <p>Tem certeza de que deseja excluir esta reserva?</p>
-                    <button onClick={() => handleDeleteReservation()}>Sim, excluir</button>
-                    <button onClick={() => setModalDelete(false)}>Cancelar</button>
-                </div>
-            </Modal>
+                    {/* Preço */}
+                    <label>Preço:</label>
+                    <input
+                        type="number"
+                        name="preco"
+                        step="0.01"
+                        value={singleUpdatedReservation.preco || ''}
+                        onChange={(e) =>
+                            setSingleUpdatedReservation((prev) => ({
+                                ...prev,
+                                preco: e.target.value,
+                            }))
+                        }
+                    />
 
-            {/* New Reservation Modal */}
+                    {/* Status */}
+                    <label>Status:</label>
+                    <select
+                        name="pagamentoStatus"
+                        value={singleUpdatedReservation.pagamentoStatus || ''}
+                        onChange={(e) =>
+                            setSingleUpdatedReservation((prev) => ({
+                                ...prev,
+                                pagamentoStatus: e.target.value,
+                            }))
+                        }
+                    >
+                        <option value="pendente">Pendente</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                <button type="submit">Salvar Alterações</button>
+                <button type="button" onClick={() => setModalEdit(false)}>
+                    Cancelar
+                </button>
+            </form>
+        </Modal>
+
+            {/* Delete Modal */ }
+    <Modal isOpen={modalDelete} closeModal={() => setModalDelete(false)}>
+        <div>
+            <h2>Excluir Reserva</h2>
+            <p>Tem certeza de que deseja excluir esta reserva?</p>
+            <button onClick={() => handleDeleteReservation()}>Sim, excluir</button>
+            <button onClick={() => setModalDelete(false)}>Cancelar</button>
+        </div>
+    </Modal>
+
+    {/* New Reservation Modal */ }
             <Modal isOpen={modalNewReservation} closeModal={() => setModalNewReservation(false)}>
                 <form onSubmit={handleNewReservation}>
                     <h2>Cadastrar Reserva</h2>
-                    <div className="input-group">
-                        <label>Usuário:</label>
-                        <select
-                            name="userId"
-                            value={singleReservation.userId}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, userId: e.target.value })}
-                            required
-                        >
-                            <option value="">Selecione...</option>
-                            {users.map((user) => (
-                                <option key={user.id} value={user.id}>
-                                    {user.nome}
-                                </option>
-                            ))}
-                        </select>
-
-                        <label>Paróquia:</label>
-                        <select
-                            name="localId"
-                            value={singleReservation.localId}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, localId: e.target.value })}
-                            required
-                        >
-                            <option value="">Selecione...</option>
-                            {parishes.map((parish) => (
-                                <option key={parish.id} value={parish.id}>
-                                    {parish.nome}
-                                </option>
-                            ))}
-                        </select>
-
-                        <label>Ônibus:</label>
-                        <select
-                            name="busId"
-                            value={singleReservation.busId}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, busId: e.target.value })}
-                            required
-                        >
-                            <option value="">Selecione...</option>
-                            {buses.map((bus) => (
-                                <option key={bus.id} value={bus.id}>
-                                    {bus.placa_onibus}
-                                </option>
-                            ))}
-                        </select>
-
-                        {/* Data de partida */}
-                        <label>Data de Partida:</label>
-                        <input
-                            type="datetime-local"
-                            name="dataPartida"
-                            value={singleReservation.dataPartida}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, dataPartida: e.target.value })}
-                            required
-                        />
-
-                        {/* Quantidade de bilhetes */}
-                        <label>Quantidade:</label>
-                        <input
-                            type="number"
-                            name="quantidade"
-                            min="1"
-                            value={singleReservation.quantidade}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, quantidade: e.target.value })}
-                        />
-
-                        {/* Preço */}
-                        <label>Preço:</label>
-                        <input
-                            type="number"
-                            name="preco"
-                            step="0.01"
-                            value={singleReservation.preco}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, preco: e.target.value })}
-                        />
-
-                        {/* Status */}
-                        <label>Status:</label>
-                        <select
-                            name="pagamentoStatus"
-                            value={singleReservation.pagamentoStatus}
-                            onChange={(e) => setSingleReservation({ ...singleReservation, pagamentoStatus: e.target.value })}
-                        >
-                            <option value="Pendente">Pendente</option>
-                            <option value="Confirmado">Confirmado</option>
-                            <option value="Cancelado">Cancelado</option>
-                        </select>
+                    <div className="input">
+                        <div className="input-group">
+                            <label>Usuário:</label>
+                            <select
+                                name="userId"
+                                value={singleReservation.userId}
+                                onChange={(e) => setSingleReservation({ ...singleReservation, userId: e.target.value })}
+                                required
+                            >
+                                <option value="">Selecione...</option>
+                                {users.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.nome}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label>Paróquia:</label>
+                            <select
+                                name="localId"
+                                value={singleReservation.localId}
+                                onChange={(e) => setSingleReservation({ ...singleReservation, localId: e.target.value })}
+                                required
+                            >
+                                <option value="">Selecione...</option>
+                                {parishes.map((parish) => (
+                                    <option key={parish.id} value={parish.id}>
+                                        {parish.nome}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label>Ônibus:</label>
+                            <select
+                                name="busId"
+                                value={singleReservation.busId}
+                                onChange={(e) => setSingleReservation({ ...singleReservation, busId: e.target.value })}
+                                required
+                            >
+                                <option value="">Selecione...</option>
+                                {buses.map((bus) => (
+                                    <option key={bus.id} value={bus.id}>
+                                        {bus.placa_onibus}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+                    {/* Data de partida */}
+                    <label>Data de Partida:</label>
+                    <input
+                        type="datetime-local"
+                        name="dataPartida"
+                        value={singleReservation.dataPartida}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, dataPartida: e.target.value })}
+                        required
+                    />
+
+                    {/* Quantidade de bilhetes */}
+                    <label>Quantidade:</label>
+                    <input
+                        type="number"
+                        name="quantidade"
+                        min="1"
+                        value={singleReservation.quantidade}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, quantidade: e.target.value })}
+                    />
+
+                    {/* Preço */}
+                    <label>Preço:</label>
+                    <input
+                        type="number"
+                        name="preco"
+                        step="0.01"
+                        value={singleReservation.preco}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, preco: e.target.value })}
+                    />
+
+                    {/* Status */}
+                    <label>Status:</label>
+                    <select
+                        name="pagamentoStatus"
+                        value={singleReservation.pagamentoStatus}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, pagamentoStatus: e.target.value })}
+                    >
+                        <option value="Pendente">Pendente</option>
+                        <option value="Confirmado">Confirmado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
 
                     <button type="submit">Salvar Reserva</button>
                     <button type="button" onClick={() => setModalNewReservation(false)}>
@@ -421,43 +426,33 @@ export default function ReservaCoordenador() {
             <Header className="header" which="coordenador" />
 
             <DataTable
-                data={reservations} 
+                data={reservations}
                 columns={[
-                    { header: "ID do Usuário", accessor: "userId" },
                     { header: "Nome do Usuário", accessor: "userNome" },
-                    { header: "Email do Usuário", accessor: "userEmail" },
                     { header: "CPF do Usuário", accessor: "userCpf" },
                     { header: "RG do Usuário", accessor: "userRg" },
-                    { header: "Telefone do Usuário", accessor: "userTelefone" },
                     { header: "Nome do Local", accessor: "localNome" },
-                    { header: "Rua do Local", accessor: "localRua" },
-                    { header: "Bairro do Local", accessor: "localBairro" },
-                    { header: "Cidade do Local", accessor: "localCidade" },
-                    { header: "ID do Ônibus", accessor: "busId" },
-                    { header: "Número do Ônibus", accessor: "busNumero" },
-                    { header: "Placa do Ônibus", accessor: "busPlacaOnibus" },
-                    { header: "Quantidade de Passagens", accessor: "quantidade" },
-                    { header: "Preço da Passagem", accessor: "preco" },
+                    { header: "Quant. Passagens", accessor: "quantidade" },
+                    { header: "Preço Passagem", accessor: "preco" },
                     { header: "Status", accessor: "pagamentoStatus" },
-                    { header: "Data de Partida", accessor: "dataPartida" }
-                ]} 
+                ]}
 
-                eventEditButton={(item) => { 
-                    setSingleUpdatedReservation(item);   
-                    setModalEdit(true); 
-                    
-                }} 
-                eventDelButton={(item) => { 
+                eventEditButton={(item) => {
+                    setSingleUpdatedReservation(item);
+                    setModalEdit(true);
+
+                }}
+                eventDelButton={(item) => {
                     setSingleReservation(item);
-                    setModalDelete(true); 
+                    setModalDelete(true);
                 }}
                 searchField={'userEmail'}
                 itemsPerPage={5}
-                
+
             />
 
             <div className="cards-bottom">
-                <Card width={'100%'} height={'auto'} 
+                <Card width={'100%'} height={'auto'}
                     childrenTop={(
                         <div>
                             <span className="new-reservation-top-span">
@@ -467,12 +462,12 @@ export default function ReservaCoordenador() {
                     )}
                     childrenBottom={(
                         <span>
-                            <p style={{marginBottom: 12}}>Registre uma nova reserva.</p>
+                            <p style={{ marginBottom: 12 }}>Registre uma nova reserva.</p>
                             <button onClick={() => { setSingleReservation({}); setModalNewReservation(true); }}>Criar</button>
                         </span>
                     )}
                 />
             </div>
-        </div>
+        </div >
     );
 }

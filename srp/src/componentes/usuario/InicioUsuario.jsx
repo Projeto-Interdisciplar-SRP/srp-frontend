@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../utilizavel/Header";
 import Footer from "../utilizavel/Footer";
-
+import { useNavigate } from "react-router-dom";
 import "../../styles/inicio_usuario.css";
 import logoSrp from "../../img/SRP Viagens.png";
 import logoSol from "../../img/Sun.png";
@@ -19,6 +19,12 @@ import valor3 from "../../img/Shield.png";
 
 
 export default function InicioUsuario() {
+
+  const navigate = useNavigate();
+  
+  const Pagamento = () => {
+    navigate('/pagamento')
+}
     const [current, setCurrent] = useState(1); // Começa na imagem do meio (índice 1)
     const handleNext = () => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -39,24 +45,13 @@ export default function InicioUsuario() {
         </div>
       </div>
       <div className="valores-viagens">
-        <h1>Valor das passagens nas cidades de origem</h1>
-        <div className="origens">
+        <h1>Pronto para ir para Aparecida do Norte?</h1>
           <div className="origem">
-            <p>Onibus saindo de </p>
-            <h3>São Pedro</h3>
-            <p>Valor: R$50,00</p>
+            <p>Aqui Sua Experiencia Sera Incrivel</p>
+            <h3>Venha nessa Jornada Conosco</h3>
+            <p>Deus te Abençoe</p>
+            <button onClick={Pagamento}>Ver Mais</button>
           </div>
-          <div className="origem">
-            <p>Onibus saindo de </p>
-            <h3>São Pedro</h3>
-            <p>Valor: R$50,00</p>
-          </div>
-          <div className="origem">
-            <p>Onibus saindo de </p>
-            <h3>São Pedro</h3>
-            <p>Valor: R$50,00</p>
-          </div>
-        </div>
       </div>
       <div className="carrosel">
         <h1>Viaje Com Segurança, Preço Justo e Fiel</h1>

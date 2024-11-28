@@ -1,84 +1,160 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import env from '/env.js';
+import { useEffect, useState } from "react";
+import Header from "../utilizavel/Header";
+import Modal from "../utilizavel/Modal";
+import DataTable from "../utilizavel/DataTable";
+import Card from "../utilizavel/Card";
+import "../../styles/modelo_crud.css";
+import env from "/env.js";
+import { useNavigate } from "react-router-dom";
 
-const ListarCoordenadores = () => {
-  const [coordenadores, setCoordenadores] = useState([]);
-  const navigate = useNavigate();
+export default function PessoaCoordenador() {
+    const navigate = useNavigate();
+    const [coordenadores, setCoordenadores] = useState([]);
+    const [coordenadorSelecionado, setCoordenadorSelecionado] = useState(null);
+    const [carregando, setCarregando] = useState(false);
+    const [modalEditar, setModalEditar] = useState(false);
+    const [modalExcluir, setModalExcluir] = useState(false);
 
-  useEffect(() => {
-    buscarCoordenadores();
-  }, []);
+    const cadastroCoordenador = () =>{
+      navigate('/secretaria/cadastro/coordenador')
+    };
 
-  const buscarCoordenadores = async () => {
-    try {
-      const resposta = await axios.get(env.url.local + '/user/coordenadores');
-      setCoordenadores(resposta.data);
-    } catch (error) {
-      console.error('Erro ao buscar coordenadores:', error);
+    useEffect(() => {
+        setCarregando(true);
+        buscarCoordenadores();
+    }, []);
+
+    async function buscarCoordenadores() {
+        const response = await fetch(env.url.local + '/user/coordinator', {
+            method: 'GET',
+            headers: {
+                'ngrok-skip-browser-warning': 'true',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            setCoordenadores(data);
+        } else {
+            console.error("Resposta inválida", data);
+        }
+        setCarregando(false);
     }
-  };
 
-  const excluirCoordenador = async (id) => {
-    try {
-      const confirmacao = await Swal.fire({
-        title: 'Tem certeza?',
-        text: 'Deseja excluir este coordenador?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Sim, excluir',
-        cancelButtonText: 'Cancelar'
-      });
+    const handleEditarCoordenador = async (e) => {
+        e.preventDefault();
+        const coordenadorAtualizado = {
+            ...coordenadorSelecionado
+        };
 
-      if (confirmacao.isConfirmed) {
-        await axios.delete(`${env.url.local}/user/coordinator/${id}`);
-        setCoordenadores(coordenadores.filter(coordenador => coordenador.id !== id));
-        Swal.fire('Excluído!', 'O coordenador foi excluído.', 'success');
-      }
-    } catch (error) {
-      console.error('Erro ao excluir coordenador:', error);
+        await fetch(env.url.local + `/user/edit`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(coordenadorAtualizado)
+        });
+
+        setModalEditar(false);
+        buscarCoordenadores();
+    };
+
+    const handleExcluirCoordenador = async () => {
+        await fetch(env.url.local + `/user/delete/${coordenadorSelecionado.id}`, {
+            method: 'DELETE'
+        });
+        setModalExcluir(false);
+        buscarCoordenadores();
+    };
+
+    if (carregando) {
+        return <h1>Carregando...</h1>;
     }
-  };
 
-  const verDetalhes = (id) => {
-    navigate(`/coordenador/detalhes/${id}`);
-  };
+    return (
+        <div>
+            <Header className="header" which="coordenador" />
 
-  const editarCoordenador = (id) => {
-    navigate(`/coordenador/editar/${id}`);
-  };
+            <Modal isOpen={modalEditar} closeModal={() => setModalEditar(false)}>
+                <form onSubmit={handleEditarCoordenador}>
+                    <h2>Editar Coordenador</h2>
+                    <div className="input">
+                        <div className="input-group">
+                            <label>Nome:</label>
+                            <input
+                                type="text"
+                                value={coordenadorSelecionado?.nome || ''}
+                                onChange={(e) =>
+                                    setCoordenadorSelecionado({ ...coordenadorSelecionado, nome: e.target.value })
+                                }
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label>Email:</label>
+                            <input
+                                type="email"
+                                value={coordenadorSelecionado?.email || ''}
+                                onChange={(e) =>
+                                    setCoordenadorSelecionado({ ...coordenadorSelecionado, email: e.target.value })
+                                }
+                            />
+                        </div>
+                        {/* Adicione outros campos necessários aqui */}
+                    </div>
+                    <button type="submit">Salvar Alterações</button>
+                    <button type="button" onClick={() => setModalEditar(false)}>Cancelar</button>
+                </form>
+            </Modal>
 
-  return (
-    <div className="listar-coordenadores">
-      <h2>Lista de Coordenadores</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {coordenadores.map(coordenador => (
-            <tr key={coordenador.id}>
-              <td>{coordenador.nome}</td>
-              <td>{coordenador.email}</td>
-              <td>{coordenador.telefone}</td>
-              <td>
-                <button onClick={() => verDetalhes(coordenador.id)}>Ver Detalhes</button>
-                <button onClick={() => editarCoordenador(coordenador.id)}>Editar</button>
-                <button onClick={() => excluirCoordenador(coordenador.id)}>Excluir</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+            <Modal isOpen={modalExcluir} closeModal={() => setModalExcluir(false)}>
+                <div>
+                    <h2>Excluir Coordenador</h2>
+                    <p>Tem certeza de que deseja excluir este coordenador?</p>
+                    <button onClick={handleExcluirCoordenador}>Sim, excluir</button>
+                    <button onClick={() => setModalExcluir(false)}>Cancelar</button>
+                </div>
+            </Modal>
 
-export default ListarCoordenadores;
+            <DataTable
+                data={coordenadores}
+                columns={[
+                    { header: "ID", accessor: "id" },
+                    { header: "Nome", accessor: "nome" },
+                    { header: "Email", accessor: "email" },
+                    { header: "CPF", accessor: "cpf" },
+                    { header: "Cidade", accessor: "cidade" },
+                ]}
+                eventEditButton={(item) => {
+                    setModalEditar(true);
+                    setCoordenadorSelecionado(item);
+                }}
+                eventDelButton={(item) => {
+                    setModalExcluir(true);
+                    setCoordenadorSelecionado(item);
+                }}
+                searchField="cpf"
+                itemsPerPage={5}
+            />
+
+            <div className="cards-bottom">
+                <Card
+                    width="100%"
+                    height="auto"
+                    childrenTop={
+                        <div>
+                            <span className="new-coordenador-top-span">
+                                <h2>Novo Coordenador</h2>
+                            </span>
+                        </div>
+                    }
+                    childrenBottom={
+                        <span>
+                            <p style={{ marginBottom: 12 }}>Registre um novo coordenador no sistema.</p>
+                            <button onClick={cadastroCoordenador}>Criar</button>
+                        </span>
+                    }
+                />
+            </div>
+        </div>
+    );
+}

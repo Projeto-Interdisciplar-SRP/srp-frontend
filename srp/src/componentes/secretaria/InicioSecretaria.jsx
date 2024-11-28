@@ -11,8 +11,11 @@ export default function InicioSecretaria() {
     const CadastroIngressos = () => {
         navigate('/secretaria/listar/ingressos')
     }
+    const CadastroUsuario = () => {
+        navigate('/secretaria/listar/usuarios')
+    }
     const CadastroCoordenadores = () => {
-        navigate('/secretaria/listar/coordenador')
+        navigate('/secretaria/listar/coordenadores')
     }
     const paroquias = () => {
         navigate('/paroquias')
@@ -25,9 +28,9 @@ export default function InicioSecretaria() {
         <h1>Secretária</h1>
         <div className="inicio">
           <div className="cards">
-            <h3>Coordenadores</h3>
+            <h3>Usuários</h3>
             <p>Aqui a Admistração poderá ver, editar, e outras funcionalidades</p>
-            <button onClick={CadastroCoordenadores}>Ver Coordenadores</button>
+            <button onClick={CadastroUsuario}>Ver Usuários</button>
           </div>
           <div className="cards">
             <h3>Ônibus</h3>
@@ -35,7 +38,7 @@ export default function InicioSecretaria() {
             <button onClick={CadastroOnibus}> Ver Ônibus</button>
           </div>
           <div className="cards">
-            <h3>Ingresso</h3>
+            <h3>Ingressos</h3>
             <p>Aqui a Admistração poderá ver, editar, e outras funcionalidades</p>
             <button onClick={CadastroIngressos}>Ver Ingressos</button>
           </div>
@@ -45,9 +48,9 @@ export default function InicioSecretaria() {
             <button onClick={CadastroIngressos}>Relatório</button>
           </div>
           <div className="cards">
-            <h3>Relatório de Vendas</h3>
-            <p>Aqui a Admistração poderá ver, todos os pagamentos dos ingressos</p>
-            <button onClick={CadastroIngressos}>Relatório</button>
+            <h3>Coordenadores</h3>
+            <p>Aqui a Admistração poderá ver, editar, e outras funcionalidades</p>
+            <button onClick={CadastroCoordenadores}> Ver Coordenadores</button>
           </div>
           <div className="cards">
             <h3>Paróquias</h3>
