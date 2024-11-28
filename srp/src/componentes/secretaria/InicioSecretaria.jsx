@@ -9,7 +9,7 @@ export default function InicioSecretaria() {
         navigate('/adm/onibus')
     }
     const CadastroIngressos = () => {
-        navigate('/secretaria/listar/ingressos')
+        navigate('/secretaria/listar/reservas')
     }
     const CadastroUsuario = () => {
         navigate('/secretaria/listar/usuarios')
@@ -18,7 +18,10 @@ export default function InicioSecretaria() {
         navigate('/secretaria/listar/coordenadores')
     }
     const paroquias = () => {
-        navigate('/paroquias')
+        navigate('/secretaria/paroquias')
+    }
+    const viagens = () => {
+        navigate('/secretaria/viagens')
     }
     
     return (
@@ -38,14 +41,14 @@ export default function InicioSecretaria() {
             <button onClick={CadastroOnibus}> Ver Ônibus</button>
           </div>
           <div className="cards">
-            <h3>Ingressos</h3>
+            <h3>Reservas</h3>
             <p>Aqui a Admistração poderá ver, editar, e outras funcionalidades</p>
             <button onClick={CadastroIngressos}>Ver Ingressos</button>
           </div>
           <div className="cards">
             <h3>Viagens</h3>
             <p>Aqui a Admistração poderá ver, editar, e outras funcionalidades</p>
-            <button onClick={CadastroIngressos}>Relatório</button>
+            <button onClick={viagens}>Ver Viagens</button>
           </div>
           <div className="cards">
             <h3>Coordenadores</h3>

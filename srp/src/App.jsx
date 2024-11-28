@@ -73,6 +73,7 @@ const App = () => {
           <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/adm/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/coordenador/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
+          <Route path='/secretaria/listar/reservas' element={<AuthProvider> <ReservaCoordenador /> </AuthProvider>}/>
 
           <Route path='/secretaria/onibus' element={<AuthProvider> <OnibusSecretaria/> </AuthProvider>}/>
           <Route path='/secretaria/coordenador' element={<AuthProvider> <CoordenadorSecretaria/> </AuthProvider>}/>
@@ -96,11 +97,11 @@ const App = () => {
           <Route path="/secretaria/listar/viagem/detalhes" element={ <Editarviagem /> } />
           <Route path="/secretaria/listar/viagem/editar" element={ <Detalhesviagem /> } />
 
-          <Route path="/pagamento" element={ <Pagamento /> } />
+          <Route path="/pagamento" element={<AuthProvider> <Pagamento /> </AuthProvider>} />
           <Route path="/cancelamento" element={ <Cancelamento /> } />
           <Route path="/relatorio" element={ <RelatórioPagamento /> } />
 
-          <Route path="/paroquias" element={ <Paróquia /> } />
+          <Route path="/secretaria/paroquias" element={ <Paróquia /> } />
           
       </Routes>
     </Router>

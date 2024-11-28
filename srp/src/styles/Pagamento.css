@@ -4,14 +4,20 @@
   padding: 20px;
 }
 
+.data {
+}
+
 .left-section, .right-section {
   margin-top: 30px;
   margin: 20px;
   width: 45%;
+  height: 120dvh;
 }
+
 .right-section .card h3, .right-section .card p{
   text-align: left;
 }
+
 .card {
   border: 1px solid #ccc;
   padding: 20px;
@@ -50,9 +56,12 @@ text-align: left;
 align-items: center;
 justify-content: left;
 width: 100%;
+gap: 10px;
 }
+
 input[type="checkbox" i] {
 margin: 0;
+width:15px;
 }
 .confirm-button {
   background-color: #007bff;
