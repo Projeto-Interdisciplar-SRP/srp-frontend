@@ -20,6 +20,7 @@ import ListarCoodenador from './componentes/coordenador/ListaCoordenador';
 import EditarCoordenador from './componentes/coordenador/EditarCoordenador';
 
 import Sobre from "./componentes/Sobre.jsx";
+import Ajuda from "./componentes/Ajuda.jsx";
 
 import Welcome from "./componentes/Welcome";
 
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/cadastro/coordenador" element={<CadastroCoordenador />} />
 
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/ajuda" element={<Ajuda />} />
 
           <Route path='/coordenador/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>
           <Route path='/adm/onibus' element={<AuthProvider> <OnibusCoordenador /> </AuthProvider>}/>

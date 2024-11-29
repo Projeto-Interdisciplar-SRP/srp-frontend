@@ -63,7 +63,7 @@ export default function Header({ which }) {
               <a href="/inicio">Inicio</a>
             </li>
             <li>
-              <a href="">Sobre</a>
+              <a href="/sobre">Sobre</a>
             </li>
             <li>
               <a href="">Viagem</a>
@@ -72,7 +72,7 @@ export default function Header({ which }) {
               <a href="">Cancelamento</a>
             </li>
             <li>
-              <a href="">Ajuda</a>
+              <a href="/ajuda">Ajuda</a>
             </li>
           </ul>
           <div className="entrar-perfil">
