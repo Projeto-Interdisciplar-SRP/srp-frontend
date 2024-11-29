@@ -96,3 +96,11 @@ ul li {
 ul li:hover {
   color: #007bff;
 }
+
+select{
+  width: 100%;
+}
+
+.selects{
+margin-bottom: 20px;
+}

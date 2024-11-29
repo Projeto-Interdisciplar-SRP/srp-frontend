@@ -93,9 +93,7 @@ const App = () => {
           <Route path="/secretaria/listar/onibus/editar" element={ <EditarOnibus /> } />
 
           <Route path="/secretaria/cadastro/viagem" element={ <CadastroViagem /> } />
-          <Route path="/secretaria/listar/viagem" element={ <ListarViagem /> } />
-          <Route path="/secretaria/listar/viagem/detalhes" element={ <Editarviagem /> } />
-          <Route path="/secretaria/listar/viagem/editar" element={ <Detalhesviagem /> } />
+          <Route path="/secretaria/viagens" element={ <ListarViagem /> } />
 
           <Route path="/pagamento" element={<AuthProvider> <Pagamento /> </AuthProvider>} />
           <Route path="/cancelamento" element={ <Cancelamento /> } />

@@ -2,6 +2,7 @@ import env from "/env.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logoSol from "../../img/Sun (1).png";
+import '../../styles/Login.css'
 
 export default function ConfirmarCoordenador() {
     const [usePassword, setPassword] = useState('');
@@ -36,7 +37,7 @@ export default function ConfirmarCoordenador() {
             {useMensagem && <p className="mensagem">{useMensagem}</p>}
 
             <form onSubmit={verifyIdentity} className='form-login'>
-                <div className="input-group">
+                <div className="input-auth">
                     <label>Senha:</label>
                     <input
                     type="password"

@@ -121,7 +121,9 @@ export default function PessoaCoordenador() {
     };
 
     if (useLoading) {
-        return <h1>Carregando...</h1>;
+        return <div className="Carregando"> 
+        <img src={Loading} alt="" />
+</div>;
     }
 
     return (

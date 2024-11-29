@@ -124,7 +124,7 @@ const Login = () => {
         <button type="submit" disabled={carregando}>
           {carregando ? 'Entrando...' : 'Login'}
         </button>
-        <div className="cadastro">
+        <div className="cadastro-voltar">
           <p>Não possui conta? Clique abaixo </p>
           <button type="button" onClick={handleCadastroRedirect} className="cadastro-btn">
             Ir para Cadastro

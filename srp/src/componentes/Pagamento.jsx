@@ -18,71 +18,68 @@ const CheckoutPage = () => {
   const [cpf, setCpf] = useState('');
   const [termos, setTermos] = useState(false);
   const [paroquia, setParoquias] = useState([]);
+  const [destino, setDestino] = useState([]);
+  const [selectedDestino, setSelectedDestino] = useState([]);
   const [selectedParoquia, setSelectedParoquia] = useState('');
   const [selectedParoquiaNome, setSelectedParoquiaNome] = useState('');
+  const [selectedDestinoNome, setSelectedDestinoNome] = useState('');
   const [loading, setLoading] = useState(false);
-  const [singleReservation, setSingleReservation] = useState({
-    userId: '', // ID do usuário logado
-    quantidade: 1, // Quantidade de passagens
-    preco: 100, // Preço total
-    pagamentoStatus: 'pendente', // Status inicial do pagamento
-    localId: '', // ID da paróquia
-    busId: '1', // ID do ônibus (ajuste conforme necessário)
-    dataPartida: '2024-10-10T07:00:00' // Data de partida
-});
 
-const handleConfirmarPagamento = async () => {
-  if (!termos) {
+  const [ida, setIda] = useState(null);
+  const [volta, setVolta] = useState(null);
+
+  const handleConfirmarPagamento = async () => {
+    if (!termos) {
       Swal.fire({
-          icon: 'warning',
-          title: 'Atenção',
-          text: 'Você precisa concordar com os termos de uso antes de confirmar o pagamento.',
+        icon: 'warning',
+        title: 'Atenção',
+        text: 'Você precisa concordar com os termos de uso antes de confirmar o pagamento.',
       });
       return;
-  }
+    }
 
-  const newReservation = {
+    const newReservation = {
       ticket: {
-          id_usuario: singleReservation.userId, // Substitua pelo ID real do usuário
-          quantidade: singleReservation.quantidade,
-          preco: singleReservation.preco,
-          status: 'confirmado',
+        id_usuario: singleReservation.userId, // Substitua pelo ID real do usuário
+        quantidade: singleReservation.quantidade,
+        preco: singleReservation.preco,
+        status: 'confirmado',
       },
       travel: {
-          id_paroquia: selectedParoquia,
-          id_onibus: singleReservation.busId,
-          data_partida: singleReservation.dataPartida,
+        id_paroquia: selectedParoquia,
+        id_onibus: singleReservation.busId,
+        data_partida: singleReservation.dataPartida,
       },
-  };
+    };
 
-  try {
+    try {
       const response = await fetch(env.url.local + '/reservation/register', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newReservation),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newReservation),
       });
 
       if (response.ok) {
-          Swal.fire({
-              icon: 'success',
-              title: 'Pagamento Confirmado',
-              text: `Paróquia selecionada: ${selectedParoquiaNome || 'Nenhuma paróquia selecionada'}`,
-          });
-          // Adicione qualquer lógica adicional, como navegação ou limpeza de formulário
+        Swal.fire({
+          icon: 'success',
+          title: 'Pagamento Confirmado',
+          text: `Paróquia selecionada: ${selectedParoquiaNome || 'Nenhuma paróquia selecionada'}`,
+        });
+        // Adicione qualquer lógica adicional, como navegação ou limpeza de formulário
       } else {
-          throw new Error('Erro ao confirmar a reserva');
+        throw new Error('Erro ao confirmar a reserva');
       }
-  } catch (error) {
+    } catch (error) {
       console.error(error);
       Swal.fire({
-          icon: 'error',
-          title: 'Erro',
-          text: 'Não foi possível confirmar sua reserva. Tente novamente mais tarde.',
+        icon: 'error',
+        title: 'Erro',
+        text: 'Não foi possível confirmar sua reserva. Tente novamente mais tarde.',
       });
-  }
-};
+    }
+  };
 
 
   async function fetchAllParoquias() {
@@ -116,6 +113,39 @@ const handleConfirmarPagamento = async () => {
 
   useEffect(() => {
     fetchAllParoquias();
+  }, []);
+
+  async function fetchAllDestino() {
+    setLoading(true);
+    try {
+      const response = await fetch(env.url.local + '/place/', {
+        method: 'GET',
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+
+      if (Array.isArray(data.data)) {
+        setDestino(data.data);
+      } else {
+        console.error('A resposta não é um array válido', data.data);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar as paróquias:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: 'Não foi possível carregar as paróquias. Tente novamente mais tarde.',
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchAllDestino();
   }, []);
 
 
@@ -166,22 +196,22 @@ const handleConfirmarPagamento = async () => {
         <div className="card">
           <h3>Forma de pagamento</h3>
           <select>
-            <option value="None">Selecione uma forma de pagamento</option>  
-            <option value="pix">Pix</option>  
-            <option value="cartao">Cartão de Crédito</option>  
-          </select> 
+            <option value="None">Selecione uma forma de pagamento</option>
+            <option value="pix">Pix</option>
+            <option value="cartao">Cartão de Crédito</option>
+          </select>
         </div>
         <div className="confirm-section">
           <div className="termos">
             <input
-            type="checkbox"
-            id="terms"
-            checked={termos}
-            onChange={() => setTermos(!termos)}
-          />
-          <p htmlFor="terms">Eu li e concordo com os termos de uso</p>
+              type="checkbox"
+              id="terms"
+              checked={termos}
+              onChange={() => setTermos(!termos)}
+            />
+            <p htmlFor="terms">Eu li e concordo com os termos de uso</p>
           </div>
-          
+
           <button className="confirm-button" onClick={handleConfirmarPagamento}>
             Confirmar e pagar
           </button>
@@ -193,46 +223,82 @@ const handleConfirmarPagamento = async () => {
       <div className="right-section">
         {/* Detalhes da Viagem */}
         <div className="card">
-          <label htmlFor="">Qual Paróquia Deseja Embarcar?</label>
-          <select
-            name="selectParoquia"
-            id="selectParoquia"
-            value={selectedParoquia}
-            onChange={(e) => {
-              const selectedId = e.target.value;
-              setSelectedParoquia(selectedId);
+          <div className="selects">
+            <label htmlFor="">Qual Paróquia Deseja Embarcar?</label>
+            <select
+              name="selectParoquia"
+              id="select"
+              value={selectedParoquia}
+              onChange={(e) => {
+                const selectedId = e.target.value;
+                setSelectedParoquia(selectedId);
 
-              // Busque o nome correspondente pelo ID
-              const selectedParoquiaObj = paroquia.find((p) => p.id === selectedId);
-              setSelectedParoquiaNome(selectedParoquiaObj ? selectedParoquiaObj.nome : '');
-            }}
-          >
-            <option value="none">Selecione...</option>
-            {paroquia.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.nome}
-              </option>
-            ))}
-          </select>
-          <h3>Ida</h3>
-          <p>Paróquia selecionada: {selectedParoquiaNome || 'Nenhuma paróquia selecionada'}</p>
-          <p className='data'>{new Date(singleReservation.dataPartida).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })}</p>
+                // Busque o nome correspondente pelo ID
+                const selectedParoquiaObj = paroquia.find((p) => p.id === selectedId);
+                setSelectedParoquiaNome(selectedParoquiaObj ? selectedParoquiaObj.nome : '');
+              }}
+            >
+              <option value="none">Selecione...</option>
+              {paroquia.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.nome}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="selects">
 
-          <h3>Volta</h3>
-          <p>Aparecida, 19:00</p>
-          <p className='data'>{new Date(singleReservation.dataPartida).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })}</p>
+            <label htmlFor="">Qual Destino Deseja Ir?</label>
+            <select
+              name="selectDestino"
+              id="selectDestino"
+              value={selectedDestino}
+              onChange={(e) => {
+                const selectedId = e.target.value;
+                setSelectedDestino(selectedId);
+
+                // Busque o objeto do destino correspondente pelo ID
+                const selectedDestinoObj = destino.find((d) => d.id === selectedId);
+
+                if (selectedDestinoObj) {
+                  setSelectedDestinoNome(selectedDestinoObj.destino);
+                  // Atualize as datas de ida e volta
+                  setIda(new Date(selectedDestinoObj.ida));
+                  setVolta(new Date(selectedDestinoObj.volta));
+                }
+              }}
+            >
+              <option value="none">Selecione...</option>
+              {destino.map((d) => (
+                <option key={d.id} value={d.id}>
+                  {d.destino}
+                </option>
+              ))}
+            </select>
+          </div>
+          <h3>Embarque</h3>
+          <p>{selectedParoquiaNome || 'Nenhuma paróquia selecionada'}</p>
+          <p className='data'>{ida
+            ? ida.toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+            : 'Data de ida não disponível'}</p>
+
+          <h3>Destino</h3>
+          <p>{selectedDestinoNome || 'Nenhum Destino Selecionado'}</p>
+          <p className='data'>{volta
+            ? volta.toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+            : 'Data de ida não disponível'}</p>
           <p>R$ 70,00</p>
         </div>
 
@@ -247,7 +313,7 @@ const handleConfirmarPagamento = async () => {
         </div>
 
         {/* Confirmação e Termos de Uso */}
-        
+
       </div>
     </div>
   );
