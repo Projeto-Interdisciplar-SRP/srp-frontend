@@ -250,7 +250,7 @@ export default function PessoaCoordenador() {
                 </form>
             </Modal>
 
-            <Header className="header" which="coordenador" />
+            <Header className="header" which="funcsecretaria" />
 
             <DataTable
                 data={useUsers}

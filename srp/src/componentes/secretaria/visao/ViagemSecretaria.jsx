@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Header from "../utilizavel/Header";
-import Modal from "../utilizavel/Modal";
-import DataTable from "../utilizavel/DataTable";
-import Card from "../utilizavel/Card";
-import "../../styles/modelo_crud.css";
+import Header from "../../utilizavel/Header";
+import Modal from "../../utilizavel/Modal";
+import DataTable from "../../utilizavel/DataTable";
+import Card from "../../utilizavel/Card";
+import "../../../styles/modelo_crud.css";
 import env from "/env.js";
-import Loading from "../../assets/Loading.gif"
+import Loading from "../../../assets/Loading.gif"
 
 
 export default function ViagensCoordenador() {
@@ -49,6 +49,7 @@ export default function ViagensCoordenador() {
         const updatedTrip = {
             id: useSingleTrip.id,
             destino: useSingleTrip.destino,
+            preco_unitario: useSingleTrip.preco_unitario,
             ida: useSingleTrip.ida,
             volta: useSingleTrip.volta
         };
@@ -56,8 +57,10 @@ export default function ViagensCoordenador() {
         await fetch(env.url.local + `/place/update`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true',
             },
+            mode: 'cors',
             body: JSON.stringify(updatedTrip)
         });
 
@@ -71,8 +74,9 @@ export default function ViagensCoordenador() {
 
         const registeredTrip = {
           destino: useSingleTrip.destino,
-            ida: useSingleTrip.ida,
-            volta: useSingleTrip.volta
+          preco_unitario: useSingleTrip.preco_unitario,
+          ida: useSingleTrip.ida,
+          volta: useSingleTrip.volta
         };
 
         await fetch(env.url.local + `/place/register`, {
@@ -115,6 +119,13 @@ export default function ViagensCoordenador() {
                         value={useSingleTrip.destino || ""} 
                         onChange={(e) => setUseSingleTrip({ ...useSingleTrip, destino: e.target.value })} 
                     />
+
+                    <label>Preço do Ingresso 'Unitario':</label>
+                    <input 
+                        type="number" 
+                        value={useSingleTrip.preco_unitario || ""} 
+                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, preco_unitario: e.target.value })} 
+                    />
                     
                     <label>Ida:</label>
                     <input 
@@ -153,6 +164,12 @@ export default function ViagensCoordenador() {
                         value={useSingleTrip.destino || ""} 
                         onChange={(e) => setUseSingleTrip({ ...useSingleTrip, destino: e.target.value })} 
                     />
+                    <label>Preço do Ingresso 'Unitario':</label>
+                    <input 
+                        type="number" 
+                        value={useSingleTrip.preco_unitario || ""} 
+                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, preco_unitario: e.target.value })} 
+                    />
                     
                     <label>Ida:</label>
                     <input 
@@ -173,13 +190,14 @@ export default function ViagensCoordenador() {
                 </form>
             </Modal>
 
-            <Header className="header" which="coordenador" />
+            <Header className="header" which="funcsecretaria" />
 
             <DataTable 
                 data={useTrips} 
                 columns={[    
                     { header: "ID", accessor: "id" },
                     { header: "Destino", accessor: "destino" },
+                    { header: "Preço do Ingresso", accessor: "preco_unitario" },
                     { header: "Ida", accessor: "ida" },
                     { header: "Volta", accessor: "volta" }
                 ]} 

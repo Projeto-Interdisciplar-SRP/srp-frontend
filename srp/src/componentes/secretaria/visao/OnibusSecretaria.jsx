@@ -46,6 +46,9 @@ export default function OnibusSecretaria() {
 
         const updatedBus = {
             id: useSingleBus.id,
+            nomeMotorista: useSingleBus.nomeMotorista,
+            quantidadeDeAssento: useSingleBus.quantidadeDeAssento,
+            rgMotorista: useSingleBus.rgMotorista,
             numero: useSingleBus.numero,
             placa_onibus: useSingleBus.placa_onibus
         };
@@ -66,6 +69,9 @@ export default function OnibusSecretaria() {
         e.preventDefault();
 
         const registeredBus = {
+            nomeMotorista: useSingleBus.nomeMotorista,
+            quantidadeDeAssento: useSingleBus.quantidadeDeAssento,
+            rgMotorista: useSingleBus.rgMotorista,
             numero: useSingleBus.numero,
             placa_onibus: useSingleBus.placa_onibus
         };
@@ -108,6 +114,27 @@ export default function OnibusSecretaria() {
                         value={useSingleBus.placa_onibus || ""} 
                         onChange={(e) => setUseSingleBus({ ...useSingleBus, placa_onibus: e.target.value })} 
                     />
+                    <label>Quantidade de Assentos:</label>
+                    
+                    <input 
+                        type="text" 
+                        value={useSingleBus.quantidadeDeAssento || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, quantidadeDeAssento: e.target.value })} 
+                    />
+                    <label>Nome do Motorista:</label>
+                    
+                    <input 
+                        type="text" 
+                        value={useSingleBus.nomeMotorista || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, nomeMotorista: e.target.value })} 
+                    />
+                    <label>RG do Motorista:</label>
+                    
+                    <input 
+                        type="text" 
+                        value={useSingleBus.rgMotorista || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, rgMotorista: e.target.value })} 
+                    />
                     
                     <label>Número:</label>
                     <input 
@@ -139,7 +166,27 @@ export default function OnibusSecretaria() {
                         value={useSingleBus.placa_onibus || ""} 
                         onChange={(e) => setUseSingleBus({ ...useSingleBus, placa_onibus: e.target.value })} 
                     />
+                    <label>Quantidade de Assentos:</label>
                     
+                    <input 
+                        type="text" 
+                        value={useSingleBus.quantidadeDeAssento || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, quantidadeDeAssento: e.target.value })} 
+                    />
+                    <label>Nome do Motorista:</label>
+                    
+                    <input 
+                        type="text" 
+                        value={useSingleBus.nomeMotorista || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, nomeMotorista: e.target.value })} 
+                    />
+                    <label>RG do Motorista:</label>
+                    
+                    <input 
+                        type="text" 
+                        value={useSingleBus.rgMotorista || ""} 
+                        onChange={(e) => setUseSingleBus({ ...useSingleBus, rgMotorista: e.target.value })} 
+                    />
                     <label>Número:</label>
                     <input 
                         type="text" 
@@ -152,13 +199,16 @@ export default function OnibusSecretaria() {
                 </form>
             </Modal>
 
-            <Header className="header" which="secretaria" />
+            <Header className="header" which="funcsecretaria" />
 
             <DataTable 
                 data={useBus} 
                 columns={[    
                     { header: "ID", accessor: "id" },
+                    { header: "Nome Motorista", accessor: "nomeMotorista" },
+                    { header: "RG Motorista", accessor: "rgMotorista" },
                     { header: "Placa", accessor: "placa_onibus" },
+                    { header: "Quant. Assentos", accessor: "quantidadeDeAssento" },
                     { header: "Número", accessor: "numero" }
                 ]} 
                 eventEditButton={(item) => { 

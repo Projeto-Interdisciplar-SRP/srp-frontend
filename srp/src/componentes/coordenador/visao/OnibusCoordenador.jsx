@@ -5,7 +5,7 @@ import DataTable from "../../utilizavel/DataTable";
 import Card from "../../utilizavel/Card";
 import "../../../styles/modelo_crud.css";
 import env from "/env.js";
-
+import Loading from '../../../assets/Loading.gif'
 export default function OnibusCoordenador() {
     const [useBus, setBus] = useState([]); // todos os usuários
     const [useSingleBus, setUseSingleBus] = useState({}); // dados de um ônibus selecionado

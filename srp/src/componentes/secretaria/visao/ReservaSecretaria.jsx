@@ -22,6 +22,7 @@ export default function ReservaCoordenador() {
     const [users, setUsers] = useState([]);
     const [parishes, setParishes] = useState([]);
     const [buses, setBuses] = useState([]);
+    const [place, setPlace] = useState([]);
 
     // Função genérica para buscar dados
     const fetchSelectData = async (url, setData) => {
@@ -67,6 +68,7 @@ export default function ReservaCoordenador() {
         await fetchSelectData(env.url.local + '/user/', setUsers);
         await fetchSelectData(env.url.local + '/local/', setParishes);
         await fetchSelectData(env.url.local + '/bus/', setBuses);
+        await fetchSelectData(env.url.local + '/place/', setPlace);
 
         await fetchAllReservations();
 
@@ -87,13 +89,16 @@ export default function ReservaCoordenador() {
         try {
             // Atualiza o corpo da reserva conforme o formato esperado pela API
             const updatedReservation = {
-                id_onibus: singleUpdatedReservation.busId,
-                id_paroquia: singleUpdatedReservation.localId,
+                id: singleUpdatedReservation.id,
+                idOnibus: singleUpdatedReservation.busId,
+                idParoquia: singleUpdatedReservation.localId,
                 data_partida: singleUpdatedReservation.dataPartida,
-                id_usuario: singleUpdatedReservation.userId,
+                idUsuario: singleUpdatedReservation.userId,
+                idPlace: singleUpdatedReservation.placeId,
                 preco: singleUpdatedReservation.preco,
                 quantidade: singleUpdatedReservation.quantidade,
-                status: singleUpdatedReservation.pagamentoStatus
+                status: singleUpdatedReservation.pagamentoStatus,
+                type: singleReservation.type
             };
 
             const response = await fetch(env.url.local + `/reservation/edit/${singleUpdatedReservation.id}`, {
@@ -123,16 +128,18 @@ export default function ReservaCoordenador() {
 
         const newReservation = {
             ticket: {
-                id_usuario: singleReservation.userId,
+                idUsuario: singleReservation.userId,
                 quantidade: singleReservation.quantidade,
                 preco: singleReservation.preco,
-                status: singleReservation.pagamentoStatus
-            },
-            travel: {
-                id_paroquia: singleReservation.localId,
-                id_onibus: singleReservation.busId,
-                data_partida: singleReservation.dataPartida
-            }
+                status: singleReservation.pagamentoStatus,
+                type: singleReservation.type,
+              },
+              travel: {
+                idParoquia: singleReservation.localId,
+                idOnibus: singleReservation.busId,
+                idPlace: singleUpdatedReservation.placeId,
+                data_partida: singleReservation.dataPartida,
+              },
         };
 
         await fetch(env.url.local + '/reservation/register', {
@@ -218,6 +225,28 @@ export default function ReservaCoordenador() {
                             </select>
                         </div>
                         <div className="input-group">
+                            {/* Paróquia */}
+                            <label>Viagem:</label>
+                            <select
+                                name="localId"
+                                required
+                                value={singleUpdatedReservation.placeId || ''}
+                                onChange={(e) =>
+                                    setSingleUpdatedReservation((prev) => ({
+                                        ...prev,
+                                        placeId: e.target.value,
+                                    }))
+                                }
+                            >
+                                <option value="">Selecione...</option>
+                                {place.map((pacles) => (
+                                    <option key={pacles.id} value={pacles.id}>
+                                        {pacles.destino}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
                             {/* Ônibus */}
                             <label>Ônibus:</label>
                             <select
@@ -288,7 +317,15 @@ export default function ReservaCoordenador() {
                             }))
                         }
                     />
-
+<label>Forma de Pagamento:</label>
+                    <input
+                        type="text"
+                        name="preco"
+                        step="0.01"
+                        placeholder="Pix ou Cartão de Crédito"
+                        value={singleReservation.type}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, type: e.target.value })}
+                    />
                     {/* Status */}
                     <label>Status:</label>
                     <select
@@ -360,6 +397,28 @@ export default function ReservaCoordenador() {
                             </select>
                         </div>
                         <div className="input-group">
+                            {/* Paróquia */}
+                            <label>Viagem:</label>
+                            <select
+                                name="localId"
+                                required
+                                value={singleUpdatedReservation.placeId || ''}
+                                onChange={(e) =>
+                                    setSingleUpdatedReservation((prev) => ({
+                                        ...prev,
+                                        placeId: e.target.value,
+                                    }))
+                                }
+                            >
+                                <option value="">Selecione...</option>
+                                {place.map((pacles) => (
+                                    <option key={pacles.id} value={pacles.id}>
+                                        {pacles.destino}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
                             <label>Ônibus:</label>
                             <select
                                 name="busId"
@@ -405,6 +464,15 @@ export default function ReservaCoordenador() {
                         value={singleReservation.preco}
                         onChange={(e) => setSingleReservation({ ...singleReservation, preco: e.target.value })}
                     />
+                    <label>Forma de Pagamento:</label>
+                    <input
+                        type="text"
+                        name="preco"
+                        step="0.01"
+                        placeholder="Pix ou Cartão de Crédito"
+                        value={singleReservation.type}
+                        onChange={(e) => setSingleReservation({ ...singleReservation, type: e.target.value })}
+                    />
 
                     {/* Status */}
                     <label>Status:</label>
@@ -425,7 +493,7 @@ export default function ReservaCoordenador() {
                 </form>
             </Modal>
 
-            <Header className="header" which="coordenador" />
+            <Header className="header" which="funcsecretaria" />
 
             <DataTable
                 data={reservations}

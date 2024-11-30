@@ -1,0 +1,31 @@
+.cancel-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+
+.form-container{
+    width: 40%;
+}
+
+.form-container form{
+
+}
+
+.form-container form input{
+    width: 95%;
+}
+
+.cancel{
+    margin-top: 20px;
+}
+
+.cancel .Voltar{
+    background-color: aliceblue;
+    color: black;
+    border: 1px solid grey;
+}
+.cancel .Voltar:hover{
+    background-color: rgb(93, 107, 119);
+    color: #fff;
+}

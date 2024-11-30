@@ -41,7 +41,7 @@ function DataTable({ data, columns, eventEditButton, eventDelButton, searchField
             <input 
                 type="text" 
                 className="search-input" 
-                placeholder={`Buscar por ${searchField.toUpperCase()}`} 
+                // placeholder={`Buscar por ${searchField.toUpperCase()}`} 
                 value={searchTerm} 
                 onChange={handleSearchChange} 
             />

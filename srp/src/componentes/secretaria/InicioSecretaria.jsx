@@ -6,16 +6,16 @@ export default function InicioSecretaria() {
     const navigate = useNavigate();
 
     const CadastroOnibus = () => {
-        navigate('/adm/onibus')
+        navigate('/secretaria/onibus')
     }
     const CadastroIngressos = () => {
-        navigate('/secretaria/listar/reservas')
+        navigate('/secretaria/reservas')
     }
     const CadastroUsuario = () => {
-        navigate('/secretaria/listar/usuarios')
+        navigate('/secretaria/usuarios')
     }
     const CadastroCoordenadores = () => {
-        navigate('/secretaria/listar/coordenadores')
+        navigate('/secretaria/coordenadores')
     }
     const paroquias = () => {
         navigate('/secretaria/paroquias')
