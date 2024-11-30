@@ -45,14 +45,18 @@ export default function ViagensCoordenador() {
     // Função para enviar o update da viagem
     const handleUpdateTrip = async (e) => {
         e.preventDefault();
+    
 
         const updatedTrip = {
             id: useSingleTrip.id,
             destino: useSingleTrip.destino,
-            preco_unitario: useSingleTrip.preco_unitario,
+            preco_unitario: parseFloat(useSingleTrip.preco_unitario.replace(',', '.')).toFixed(2),
             ida: useSingleTrip.ida,
             volta: useSingleTrip.volta
         };
+
+        console.log(updatedTrip);
+        
 
         await fetch(env.url.local + `/place/update`, {
             method: 'PUT',
@@ -122,23 +126,38 @@ export default function ViagensCoordenador() {
 
                     <label>Preço do Ingresso 'Unitario':</label>
                     <input 
-                        type="number" 
+                        type="text" 
                         value={useSingleTrip.preco_unitario || ""} 
-                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, preco_unitario: e.target.value })} 
+                        onChange={(e) => {
+                            // Expressão regular para permitir apenas números e um ponto para casas decimais
+                            const value = e.target.value;
+                            if (/^\d*\.?\d{0,2}$/.test(value)) {
+                                setUseSingleTrip({ ...useSingleTrip, preco_unitario: value });
+                            }
+                        }} 
+                        placeholder="Ex: 1022.00"
                     />
                     
                     <label>Ida:</label>
                     <input 
                         type="datetime-local" 
-                        value={useSingleTrip.ida || ""} 
-                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, ida: e.target.value })} 
+                        value={
+                            useSingleTrip.ida 
+                            ? new Date(useSingleTrip.ida).toISOString().slice(0, 16) 
+                            : ""
+                        } 
+                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, ida: new Date(e.target.value).getTime() })} 
                     />
 
                     <label>Volta:</label>
                     <input 
                         type="datetime-local" 
-                        value={useSingleTrip.volta || ""} 
-                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, volta: e.target.value })} 
+                        value={
+                            useSingleTrip.ida 
+                            ? new Date(useSingleTrip.volta).toISOString().slice(0, 16) 
+                            : ""
+                        } 
+                        onChange={(e) => setUseSingleTrip({ ...useSingleTrip, ida: new Date(e.target.value).getTime() })} 
                     />
 
                     <button type="submit">Salvar Alterações</button>

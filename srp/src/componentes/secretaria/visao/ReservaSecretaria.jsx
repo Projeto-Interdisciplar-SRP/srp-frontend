@@ -90,11 +90,11 @@ export default function ReservaCoordenador() {
             // Atualiza o corpo da reserva conforme o formato esperado pela API
             const updatedReservation = {
                 id: singleUpdatedReservation.id,
-                idOnibus: singleUpdatedReservation.busId,
-                idParoquia: singleUpdatedReservation.localId,
+                id_onibus: singleUpdatedReservation.busId,
+                id_paroquia: singleUpdatedReservation.localId,
                 data_partida: singleUpdatedReservation.dataPartida,
-                idUsuario: singleUpdatedReservation.userId,
-                idPlace: singleUpdatedReservation.placeId,
+                id_usuario: singleUpdatedReservation.userId,
+                id_place: singleUpdatedReservation.placeId,
                 preco: singleUpdatedReservation.preco,
                 quantidade: singleUpdatedReservation.quantidade,
                 status: singleUpdatedReservation.pagamentoStatus,
@@ -464,15 +464,16 @@ export default function ReservaCoordenador() {
                         value={singleReservation.preco}
                         onChange={(e) => setSingleReservation({ ...singleReservation, preco: e.target.value })}
                     />
-                    <label>Forma de Pagamento:</label>
-                    <input
-                        type="text"
-                        name="preco"
-                        step="0.01"
-                        placeholder="Pix ou Cartão de Crédito"
-                        value={singleReservation.type}
-                        onChange={(e) => setSingleReservation({ ...singleReservation, type: e.target.value })}
-                    />
+                
+                    <div className="card">
+                        <select value={singleReservation.type} onChange={(e) => setSingleReservation({ ...singleReservation, type: e.target.value })}>
+                            <option value="">Selecione uma forma de pagamento</option>
+                            <option value="pix">Pix</option>
+                            <option value="card">Cartão de Crédito</option>
+                        </select>
+                    </div>
+
+                    
 
                     {/* Status */}
                     <label>Status:</label>

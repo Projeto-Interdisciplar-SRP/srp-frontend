@@ -6,8 +6,10 @@ import '../styles/EditarPerfil.css';
 import logoSol from "../img/Sun (1).png";
 import { useAuth } from "../componentes/Auth"; // Importando o hook useAuth
 import env from '/env.js';
+import Loading from '../assets/Loading.gif'
 
 const EditarUsuario = () => {
+
   const usuario = useAuth(); //// Supondo que o ID do usuário seja salvo no estado do contexto
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -25,27 +27,39 @@ const EditarUsuario = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
       const carregarDadosUsuario = async () => {
-        try {
-          const resposta = await axios.get(`${env.url.local}/user/${usuario?.id}`);
-          const usuario = resposta.data;
-          setNome(usuario?.nome);
-          setEmail(usuario?.email);
-          setCep(usuario?.cep);
-          setRua(usuario?.rua);
-          setBairro(usuario?.bairro);
-          setCidade(usuario?.cidade);
-          setCpf(usuario?.cpf);
-          setRg(usuario?.rg);
-          setTelefone(usuario?.telefone);
-        } catch (error) {
-          console.error('Erro ao carregar dados do usuário:', error);
-          setMensagem('Erro ao carregar dados do usuário.');
-        }
+
+          const resposta = (await axios.get(`${env.url.local}/user/${usuario.id}`)).data;
+
+          console.log(resposta);
+          
+
+          const usuarioData = resposta.data;          
+
+          setNome(usuarioData?.nome);
+          setEmail(usuarioData?.email);
+          setCep(usuarioData?.cep);
+          setRua(usuarioData?.rua);''
+          setBairro(usuarioData?.bairro);
+          setCidade(usuarioData?.cidade);
+          setCpf(usuarioData?.cpf);
+          setRg(usuarioData?.rg);
+          setTelefone(usuarioData?.telefone);
+
       };
-      carregarDadosUsuario();
+
+      const loadAll = async () => {
+
+        setCarregando(true);
+        carregarDadosUsuario();
+        setCarregando(false);
+
+      }
+
+      loadAll();
     
-  }, [usuario?.id]);
+  }, [usuario.id]);
 
   const buscarEndereco = async (cep) => {
     try {
@@ -80,65 +94,74 @@ const EditarUsuario = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!nome || !email || !senha || !cep || !rua || !bairro || !cidade || !cpf || !rg || !telefone) {
-    setMensagem('Por favor, preencha todos os campos.');
-    return;
-  }
+    e.preventDefault();
+    if (!nome || !email || !senha || !cep || !rua || !bairro || !cidade || !cpf || !rg || !telefone) {
+      setMensagem('Por favor, preencha todos os campos.');
+      return;
+    }
 
-  const dadosAtualizados = {
-    id: usuario?.id,
-    nome,
-    email,
-    senha,
-    rua,
-    bairro,
-    cidade,
-    cep,
-    cpf,
-    rg,
-    telefone,
-  };
+    const dadosAtualizados = {
+      id: usuario?.id,
+      nome,
+      email,
+      senha,
+      rua,
+      bairro,
+      cidade,
+      cep,
+      cpf,
+      rg,
+      telefone,
+    };
 
   setCarregando(true);
   setMensagem('');
 
   try {
-    const resposta = await axios.put(`${env.url.local}/user/edit`, dadosAtualizados, {
-      headers: {
-        'ngrok-skip-browser-warning': 'true',
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors', // Definindo o modo como CORS
-    });
-
-    if (resposta.data.status) {
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Dados atualizados com sucesso!',
-        icon: 'success',
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Atualiza o estado do usuário no contexto ou localStorage
-          localStorage.setItem("usuario", JSON.stringify({ ...usuario, nome, email, telefone, etc })); // Atualize o usuário aqui
-          navigate('/perfil'); // Redireciona para a página de perfil
-        }
+      const resposta = await axios.put(`${env.url.local}/user/edit`, dadosAtualizados, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json',
+        },
+        mode: 'cors', // Definindo o modo como CORS
       });
-    } else {
-      setMensagem(resposta.data.message);
+
+      if (resposta.data.status) {
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Dados atualizados com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Atualiza o estado do usuário no contexto ou localStorage
+            localStorage.setItem("usuario", JSON.stringify({ ...usuario, nome, email, telefone, etc })); // Atualize o usuário aqui
+            navigate('/perfil'); // Redireciona para a página de perfil
+          }
+        });
+      } else {
+        setMensagem(resposta.data.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        setMensagem(`Erro: ${error.response.data.message}`);
+      } else {
+        setMensagem(`Erro de conexão: ${error.message}`);
+      }
+      console.error('Erro:', error);
+    } finally {
+      setCarregando(false);
     }
-  } catch (error) {
-    if (error.response) {
-      setMensagem(`Erro: ${error.response.data.message}`);
-    } else {
-      setMensagem(`Erro de conexão: ${error.message}`);
-    }
-    console.error('Erro:', error);
-  } finally {
-    setCarregando(false);
+  };
+
+  if(carregando == true){
+    return (
+      <div className="Carregando"> 
+          <img src={Loading} alt="" />
+      </div>
+    );
   }
-};
+
   return (
     <div className="edit-container">
       <div className="top">
@@ -267,6 +290,7 @@ const EditarUsuario = () => {
       </form>
     </div>
   );
+
 };
 
 export default EditarUsuario;

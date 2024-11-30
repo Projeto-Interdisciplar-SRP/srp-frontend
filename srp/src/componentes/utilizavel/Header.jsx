@@ -66,13 +66,12 @@ export default function Header({ which }) {
               <a href="/sobre">Sobre</a>
             </li>
             <li>
-              <a href="">Viagem</a>
-            </li>
-            <li>
-              <a href="">Cancelamento</a>
-            </li>
-            <li>
               <a href="/ajuda">Ajuda</a>
+            </li>
+            <li className="linkSelect">
+              <a onClick={logOut} className="link">
+                Sair
+              </a>
             </li>
           </ul>
           <div className="entrar-perfil">
@@ -175,7 +174,9 @@ export default function Header({ which }) {
           </div>
           <div className="entrar-perfil">
             <Link to="/">
-              <button type="button">Sair</button>
+              <a onClick={logOut} className="link">
+                Sair
+              </a>
             </Link>
           </div>
         </header>

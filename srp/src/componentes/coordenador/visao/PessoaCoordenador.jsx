@@ -19,9 +19,11 @@ export default function PessoaCoordenador() {
     const [useModalNewUser, setModalNewUser] = useState(false);
 
     const navigate = useNavigate();
+
     const cadastro = (id) => {
         navigate('/cadastro');
-      };
+    };
+
     useEffect(() => {
         setLoading(true);
 
@@ -43,6 +45,7 @@ export default function PessoaCoordenador() {
         } else {
             console.error("A resposta não é um array válido", data);
         }
+        
         setLoading(false);
     }
 
@@ -122,9 +125,11 @@ export default function PessoaCoordenador() {
     };
 
     if (useLoading) {
-        return <div className="Carregando"> 
-        <img src={Loading} alt="" />
-</div>;
+        return (
+            <div className="Carregando"> 
+                <img src={Loading} alt="" />
+            </div>
+        );
     }
 
     return (
